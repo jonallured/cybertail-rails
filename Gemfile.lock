@@ -163,7 +163,6 @@ DEPENDENCIES
   sass-rails
   spring
   spring-watcher-listen
-  tzinfo-data
   uglifier
   web-console
 
