@@ -1,0 +1,11 @@
+global: &global
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  database: uplink_development
+  <<: *global
+
+test:
+  database: uplink_test
+  <<: *global
