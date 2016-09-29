@@ -1,0 +1,18 @@
+language: ruby
+rvm:
+  - 2.3.1
+services:
+  - postgresql
+addons:
+  postgresql: '9.4'
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.travis.yml config/database.yml
+script:
+  - bundle exec rake db:migrate
+  - bundle exec rake
+notifications:
+  email: false
+  webhooks:
+    urls:
+      - https://uplink-rails.herokuapp.com/hooks
