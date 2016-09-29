@@ -16,6 +16,7 @@ class HooksController < ApplicationController
     url = payload['build_url']
 
     {
+      service: Service.travis,
       payload: payload,
       message: message,
       url: url,
