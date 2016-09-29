@@ -15,4 +15,4 @@ notifications:
   email: false
   webhooks:
     urls:
-      - https://uplink-rails.herokuapp.com/hooks
+      - https://uplink-app.herokuapp.com/hooks
