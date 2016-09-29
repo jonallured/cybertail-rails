@@ -1,4 +1,4 @@
-class HooksController < ApplicationController
+class TravisHooksController < ApplicationController
   protect_from_forgery with: :null_session
 
   expose(:hook)

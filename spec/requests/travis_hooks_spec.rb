@@ -20,7 +20,7 @@ describe 'Travis hooks' do
       payload: payload.to_json
     }
 
-    post '/hooks', params: params
+    post '/travis_hooks', params: params
 
     expect(Hook.count).to eq 1
 
