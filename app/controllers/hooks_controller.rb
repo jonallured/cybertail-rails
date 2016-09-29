@@ -1,4 +1,6 @@
 class HooksController < ApplicationController
+  protect_from_forgery with: :null_session
+
   expose(:hook)
 
   def create
