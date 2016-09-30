@@ -12,7 +12,7 @@ class TravisHooksController < ApplicationController
 
   def hook_params
     payload = JSON.parse(params[:payload])
-    message = "Build ##{payload['number']} of #{payload['repository']['owner_name']}/#{payload['repository']['name']}@#{payload['branch']} by #{payload['author_name']} #{payload['result_message']}."
+    message = "Build ##{payload['number']} by #{payload['author_name']} #{payload['result_message'].downcase}."
     url = payload['build_url']
 
     {

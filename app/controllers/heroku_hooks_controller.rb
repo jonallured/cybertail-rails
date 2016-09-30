@@ -11,7 +11,7 @@ class HerokuHooksController < ApplicationController
   private
 
   def hook_params
-    message = "#{params['app']} had release #{params['release']} deployed by #{params['user']}."
+    message = "#{params['release']} deployed by #{params['user']}."
     url = "https://dashboard.heroku.com/apps/#{params['app']}"
 
     {
