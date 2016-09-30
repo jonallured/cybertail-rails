@@ -1,7 +1,7 @@
 class GithubHooksController < ApplicationController
   protect_from_forgery with: :null_session
 
-  expose(:hook)
+  expose(:hook) { Hook.create hook_params }
 
   def create
     hook.save
