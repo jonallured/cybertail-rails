@@ -11,12 +11,14 @@ class HerokuHooksController < ApplicationController
   private
 
   def hook_params
+    project = params['app']
     message = "#{params['release']} deployed by #{params['user']}."
     url = "https://dashboard.heroku.com/apps/#{params['app']}"
 
     {
       service: Service.heroku,
       payload: params.to_unsafe_hash,
+      project: project,
       message: message,
       url: url,
       sent_at: Time.now

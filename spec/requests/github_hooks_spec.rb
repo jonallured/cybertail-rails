@@ -5,7 +5,9 @@ describe 'GitHub hooks' do
     github_service = Service.create name: 'GitHub'
 
     params = {
-      key: "value"
+      repository: {
+        full_name: 'jonallured/uplink-rails'
+      }
     }
 
     headers = { 'X-GitHub-Event' => 'push' }
@@ -16,6 +18,7 @@ describe 'GitHub hooks' do
 
     hook = Hook.first
     expect(hook.service).to eq github_service
+    expect(hook.project).to eq "jonallured/uplink-rails"
     expect(hook.message).to eq "Got event push, saved as Hook #{hook.id}."
     expect(hook.url).to eq "https://github.com"
   end

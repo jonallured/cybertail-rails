@@ -26,6 +26,7 @@ describe 'Travis hooks' do
 
     hook = Hook.first
     expect(hook.service).to eq travis_service
+    expect(hook.project).to eq "jonallured/uplink-rails"
     expect(hook.message).to eq "Build #1 by Jon Allured passed."
     expect(hook.url).to eq "https://travis-ci.org/"
   end

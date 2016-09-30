@@ -13,11 +13,13 @@ class GithubHooksController < ApplicationController
   private
 
   def hook_params
+    project = params[:repository][:full_name]
     url = "https://github.com"
 
     {
       service: Service.github,
       payload: params.to_unsafe_hash,
+      project: project,
       url: url,
       sent_at: Time.now
     }
