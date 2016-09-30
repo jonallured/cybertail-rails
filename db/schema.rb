@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930150457) do
+ActiveRecord::Schema.define(version: 20160930194721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "hooks", force: :cascade do |t|
     t.integer  "service_id"
-    t.json     "payload",    null: false
+    t.json     "payload",                    null: false
     t.string   "message"
     t.string   "url"
-    t.datetime "sent_at",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "project",    null: false
+    t.datetime "sent_at",                    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "project",                    null: false
+    t.boolean  "suppress",   default: false, null: false
     t.index ["service_id"], name: "index_hooks_on_service_id", using: :btree
   end
 
