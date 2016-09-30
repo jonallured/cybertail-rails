@@ -13,6 +13,7 @@ describe 'GET /v1/hooks' do
     expect(response_json).to eq([
       {
         'service_id' => travis_service.id,
+        'project' => hook.project,
         'message' => hook.message,
         'url' => hook.url,
         'sent_at' => hook.sent_at.as_json
