@@ -5,19 +5,19 @@ class GithubHooksController < ApplicationController
 
   def create
     hook.save
+    event = request.headers['X-GitHub-Event']
+    hook.update_attributes message: "Got event #{event}, saved as Hook #{hook.id}."
     head :created
   end
 
   private
 
   def hook_params
-    message = "Needs work"
     url = "https://github.com"
 
     {
       service: Service.github,
       payload: params.to_unsafe_hash,
-      message: message,
       url: url,
       sent_at: Time.now
     }
