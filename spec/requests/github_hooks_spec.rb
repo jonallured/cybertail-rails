@@ -209,4 +209,32 @@ describe 'GitHub hooks' do
       end
     end
   end
+
+  context 'watching' do
+    context 'create' do
+      it 'creates a Hook' do
+        github_service = Service.create name: 'GitHub'
+
+        params = {
+          sender: {
+            login: 'jonallured',
+            html_url: 'https://github.com/jonallured'
+          },
+          repository: { full_name: 'jonallured/uplink-rails' }
+        }
+
+        headers = { 'X-GitHub-Event' => 'watch' }
+
+        post '/github_hooks', params: params, headers: headers
+
+        expect(Hook.count).to eq 1
+
+        hook = Hook.first
+        expect(hook.service).to eq github_service
+        expect(hook.project).to eq 'jonallured/uplink-rails'
+        expect(hook.message).to eq 'jonallured started watching'
+        expect(hook.url).to eq 'https://github.com/jonallured'
+      end
+    end
+  end
 end

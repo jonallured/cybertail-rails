@@ -3,6 +3,7 @@ module GithubService
     TravisStatusParser,
     DeleteParser,
     CreateParser,
+    WatchParser,
     PushParser,
     GenericParser
   ]
