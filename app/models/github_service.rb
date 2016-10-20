@@ -1,6 +1,7 @@
 module GithubService
   PARSERS = [
     TravisStatusParser,
+    DeleteParser,
     PushParser,
     GenericParser
   ]
