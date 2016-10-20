@@ -11,7 +11,7 @@ module GithubService
     end
 
     def commit_count
-      @params[:commits].count
+      @params.fetch(:commits, []).count
     end
 
     def ref
@@ -24,6 +24,10 @@ module GithubService
 
     def url
       @params[:compare]
+    end
+
+    def suppress
+      commit_count == 0
     end
   end
 end
