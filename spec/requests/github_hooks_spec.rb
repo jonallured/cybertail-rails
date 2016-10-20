@@ -236,5 +236,35 @@ describe 'GitHub hooks' do
         expect(hook.url).to eq 'https://github.com/jonallured'
       end
     end
+
+    context 'issues' do
+      context 'create' do
+        it 'creates a Hook' do
+          github_service = Service.create name: 'GitHub'
+
+          params = {
+            issue: {
+              number: '1',
+              title: 'Something is broken',
+              html_url: 'https://github.com/jonallured/uplink-ios/issues/1'
+            },
+            sender: { login: 'jonallured' },
+            repository: { full_name: 'jonallured/uplink-rails' }
+          }
+
+          headers = { 'X-GitHub-Event' => 'issues' }
+
+          post '/github_hooks', params: params, headers: headers
+
+          expect(Hook.count).to eq 1
+
+          hook = Hook.first
+          expect(hook.service).to eq github_service
+          expect(hook.project).to eq 'jonallured/uplink-rails'
+          expect(hook.message).to eq 'jonallured opened #1: "Something is broken"'
+          expect(hook.url).to eq 'https://github.com/jonallured/uplink-ios/issues/1'
+        end
+      end
+    end
   end
 end

@@ -4,6 +4,7 @@ module GithubService
     DeleteParser,
     CreateParser,
     WatchParser,
+    IssueParser,
     PushParser,
     GenericParser
   ]
