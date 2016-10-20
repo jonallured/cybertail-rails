@@ -1,27 +1,14 @@
 class GithubHooksController < ApplicationController
   protect_from_forgery with: :null_session
 
-  expose(:hook) { Hook.create hook_params }
-
   def create
-    hook.save
-    event = request.headers['X-GitHub-Event']
-    hook.update_attributes message: "Got event #{event}, saved as Hook #{hook.id}."
+    GithubService.parse(github_event, params)
     head :created
   end
 
   private
 
-  def hook_params
-    project = params[:repository][:full_name]
-    url = "https://github.com"
-
-    {
-      service: Service.github,
-      payload: params.to_unsafe_hash,
-      project: project,
-      url: url,
-      sent_at: Time.now
-    }
+  def github_event
+    request.headers['X-GitHub-Event']
   end
 end

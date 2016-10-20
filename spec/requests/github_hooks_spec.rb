@@ -10,7 +10,7 @@ describe 'GitHub hooks' do
       }
     }
 
-    headers = { 'X-GitHub-Event' => 'push' }
+    headers = { 'X-GitHub-Event' => 'ping' }
 
     post '/github_hooks', params: params, headers: headers
 
@@ -19,7 +19,7 @@ describe 'GitHub hooks' do
     hook = Hook.first
     expect(hook.service).to eq github_service
     expect(hook.project).to eq "jonallured/uplink-rails"
-    expect(hook.message).to eq "Got event push, saved as Hook #{hook.id}."
+    expect(hook.message).to eq "Got event ping, saved as Hook #{hook.id}."
     expect(hook.url).to eq "https://github.com"
   end
 end
