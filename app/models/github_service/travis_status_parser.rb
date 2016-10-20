@@ -1,7 +1,7 @@
 module GithubService
   class TravisStatusParser < BaseParser
     def able_to_parse?
-      contexts.include? @params[:context]
+      @event == 'status' && contexts.include?(@params[:context])
     end
 
     private
