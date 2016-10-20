@@ -17,7 +17,7 @@ describe 'Heroku hooks' do
     hook = Hook.first
     expect(hook.service).to eq heroku_service
     expect(hook.project).to eq "app-name"
-    expect(hook.message).to eq "v1 deployed by jon.allured@gmail.com."
+    expect(hook.message).to eq "v1 deployed by jon.allured@gmail.com"
     expect(hook.url).to eq "https://dashboard.heroku.com/apps/app-name"
   end
 end

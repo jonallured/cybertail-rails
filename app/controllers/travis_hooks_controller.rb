@@ -14,7 +14,7 @@ class TravisHooksController < ApplicationController
     payload = JSON.parse(params[:payload])
     repository = payload['repository']
     project = [repository['owner_name'], repository['name']].join('/')
-    message = "Build ##{payload['number']} by #{payload['author_name']} #{payload['result_message'].downcase}."
+    message = "build ##{payload['number']} by #{payload['author_name']} #{payload['result_message'].downcase}"
     url = payload['build_url']
 
     {
