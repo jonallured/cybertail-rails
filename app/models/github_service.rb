@@ -1,5 +1,5 @@
 module GithubService
-  PARSERS = [GenericParser]
+  PARSERS = [PushParser, GenericParser]
 
   def self.parse(event, params)
     parsers = PARSERS.map { |klass| klass.new(event, params) }
