@@ -26,6 +26,31 @@ describe 'GitHub hooks' do
     end
   end
 
+  context 'ping event' do
+    it 'creates a suppressed hook' do
+      github_service = Service.create name: 'GitHub'
+
+      params = {
+        repository: {
+          full_name: 'jonallured/uplink-rails'
+        }
+      }
+
+      headers = { 'X-GitHub-Event' => 'ping' }
+
+      post '/github_hooks', params: params, headers: headers
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook).to be_suppress
+      expect(hook.service).to eq github_service
+      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.message).to eq nil
+      expect(hook.url).to eq nil
+    end
+  end
+
   context 'create event' do
     it 'something' do
       github_service = Service.create name: 'GitHub'

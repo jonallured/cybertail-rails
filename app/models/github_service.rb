@@ -6,6 +6,7 @@ module GithubService
     WatchParser,
     IssueParser,
     CommentParser,
+    PingParser,
     PushParser,
     GenericParser
   ]
