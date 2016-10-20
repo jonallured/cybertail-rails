@@ -22,6 +22,7 @@ module GithubService
         project: @params[:repository][:full_name],
         sent_at: Time.now,
         service: Service.github,
+        suppress: suppress,
         url: url
       }
     end
@@ -32,6 +33,10 @@ module GithubService
 
     def url
       raise 'Implement in subclass'
+    end
+
+    def suppress
+      false
     end
   end
 end
