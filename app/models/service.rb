@@ -10,6 +10,10 @@ class Service < ActiveRecord::Base
     find_by name: 'Heroku'
   end
 
+  def self.honeybadger
+    find_by name: 'Honeybadger'
+  end
+
   def self.travis
     find_by name: 'Travis CI'
   end
