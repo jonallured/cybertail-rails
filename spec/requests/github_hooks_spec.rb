@@ -33,7 +33,7 @@ describe 'GitHub hooks' do
         ref_type: 'branch',
         repository: {
           full_name: 'jonallured/uplink-rails',
-          html_url: 'https://github.com/jonallured/uplink-rails/'
+          html_url: 'https://github.com/jonallured/uplink-rails'
         }
       }
 
@@ -47,7 +47,7 @@ describe 'GitHub hooks' do
       expect(hook.service).to eq github_service
       expect(hook.project).to eq 'jonallured/uplink-rails'
       expect(hook.message).to eq 'jonallured deleted branch "tmp"'
-      expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails/'
+      expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails'
     end
   end
 
