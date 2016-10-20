@@ -23,6 +23,34 @@ describe 'GitHub hooks' do
     expect(hook.url).to eq "https://github.com"
   end
 
+  context 'create event' do
+    it 'something' do
+      github_service = Service.create name: 'GitHub'
+
+      params = {
+        sender: { login: 'jonallured' },
+        ref: 'tmp',
+        ref_type: 'branch',
+        repository: {
+          full_name: 'jonallured/uplink-rails',
+          html_url: 'https://github.com/jonallured/uplink-rails'
+        }
+      }
+
+      headers = { 'X-GitHub-Event' => 'create' }
+
+      post '/github_hooks', params: params, headers: headers
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook.service).to eq github_service
+      expect(hook.project).to eq 'jonallured/uplink-rails'
+      expect(hook.message).to eq 'jonallured created branch "tmp"'
+      expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails/tree/tmp'
+    end
+  end
+
   context 'delete event' do
     it 'something' do
       github_service = Service.create name: 'GitHub'
