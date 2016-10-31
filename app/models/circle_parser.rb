@@ -4,8 +4,7 @@ class CircleParser
   end
 
   def initialize(params)
-    parsed = JSON.parse params[:payload]
-    @params = ActiveSupport::HashWithIndifferentAccess.new parsed
+    @params = params[:payload]
   end
 
   def parse

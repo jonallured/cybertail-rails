@@ -14,7 +14,7 @@ describe 'Circle CI Hooks' do
     }
 
     params = {
-      payload: payload.to_json
+      payload: payload
     }
 
     post '/circle_hooks', params: params
