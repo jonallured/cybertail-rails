@@ -2,7 +2,8 @@ services = [
   { id: 1, name: 'Travis CI' },
   { id: 2, name: 'Heroku' },
   { id: 3, name: 'GitHub' },
-  { id: 4, name: 'Honeybadger' }
+  { id: 4, name: 'Honeybadger' },
+  { id: 5, name: 'Circle CI' }
 ]
 
 for attrs in services

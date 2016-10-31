@@ -2,6 +2,10 @@ class Service < ActiveRecord::Base
   has_many :hooks
   validates_presence_of :name
 
+  def self.circle
+    find_by name: 'Circle CI'
+  end
+
   def self.github
     find_by name: 'GitHub'
   end
