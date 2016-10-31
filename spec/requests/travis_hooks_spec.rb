@@ -6,7 +6,6 @@ describe 'Travis hooks' do
 
     payload = {
       number: "1",
-      branch: "master",
       author_name: 'Jon Allured',
       result_message: 'Passed',
       build_url: 'https://travis-ci.org/',
