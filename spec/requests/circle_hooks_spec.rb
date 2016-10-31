@@ -1,30 +1,108 @@
 require 'rails_helper'
 
 describe 'Circle CI Hooks' do
-  it 'something' do
-    circle_service = Service.create name: 'Circle CI'
+  let!(:circle_service) { Service.create name: 'Circle CI' }
 
-    payload = {
-      build_num: "1",
+  let(:payload) do
+    {
+      build_num: '1',
       committer_name: 'Jon Allured',
-      outcome: 'Passed',
+      outcome: outcome,
       build_url: 'https://circleci.com/',
       username: 'jonallured',
       reponame: 'uplink-rails'
     }
+  end
 
-    params = {
-      payload: payload
-    }
+  let(:params) { { payload: payload } }
 
-    post '/circle_hooks', params: params
+  context 'with an outcome of "canceled"' do
+    let(:outcome) { 'canceled' }
+    it 'creates a hook with a cancelled message' do
+      post '/circle_hooks', params: params
 
-    expect(Hook.count).to eq 1
+      expect(Hook.count).to eq 1
 
-    hook = Hook.first
-    expect(hook.service).to eq circle_service
-    expect(hook.project).to eq "jonallured/uplink-rails"
-    expect(hook.message).to eq "build #1 by Jon Allured passed"
-    expect(hook.url).to eq "https://circleci.com/"
+      hook = Hook.first
+      expect(hook.service).to eq circle_service
+      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.message).to eq "build #1 by Jon Allured canceled"
+      expect(hook.url).to eq "https://circleci.com/"
+    end
+  end
+
+  context 'with an outcome of "infrastructure_fail"' do
+    let(:outcome) { 'infrastructure_fail' }
+    it 'creates a hook with a failed message' do
+      post '/circle_hooks', params: params
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook.service).to eq circle_service
+      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.message).to eq "build #1 by Jon Allured failed"
+      expect(hook.url).to eq "https://circleci.com/"
+    end
+  end
+
+  context 'with an outcome of "timedout"' do
+    let(:outcome) { 'timedout' }
+    it 'creates a hook with a failed message' do
+      post '/circle_hooks', params: params
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook.service).to eq circle_service
+      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.message).to eq "build #1 by Jon Allured failed"
+      expect(hook.url).to eq "https://circleci.com/"
+    end
+  end
+
+  context 'with an outcome of "failed"' do
+    let(:outcome) { 'failed' }
+    it 'creates a hook with a failed message' do
+      post '/circle_hooks', params: params
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook.service).to eq circle_service
+      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.message).to eq "build #1 by Jon Allured failed"
+      expect(hook.url).to eq "https://circleci.com/"
+    end
+  end
+
+  context 'with an outcome of "no_tests"' do
+    let(:outcome) { 'no_tests' }
+    it 'creates a hook with a failed message' do
+      post '/circle_hooks', params: params
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook.service).to eq circle_service
+      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.message).to eq "build #1 by Jon Allured failed"
+      expect(hook.url).to eq "https://circleci.com/"
+    end
+  end
+
+  context 'with an outcome of "success"' do
+    let(:outcome) { 'success' }
+    it 'creates a hook with a failed message' do
+      post '/circle_hooks', params: params
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook.service).to eq circle_service
+      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.message).to eq "build #1 by Jon Allured passed"
+      expect(hook.url).to eq "https://circleci.com/"
+    end
   end
 end

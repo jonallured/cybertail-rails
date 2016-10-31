@@ -29,6 +29,22 @@ class CircleParser
   end
 
   def message
-    "build ##{@params[:build_num]} by #{@params[:committer_name]} #{@params[:outcome].downcase}"
+    "build ##{@params[:build_num]} by #{@params[:committer_name]} #{result}"
+  end
+
+  def result_map
+    {
+      'canceled' => 'canceled',
+      'infrastructure_fail' => 'failed',
+      'timedout' => 'failed',
+      'failed' => 'failed',
+      'no_tests' => 'failed',
+      'success' => 'passed'
+    }
+  end
+
+  def result
+    outcome = @params[:outcome]
+    result_map[outcome]
   end
 end
