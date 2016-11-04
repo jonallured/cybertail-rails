@@ -8,6 +8,7 @@ gem 'puma'
 
 gem 'coffee-rails'
 gem 'decent_exposure'
+gem 'devise'
 gem 'haml-rails'
 gem 'honeybadger'
 gem 'jbuilder'
