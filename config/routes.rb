@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   post 'honeybadger_hooks', to: 'honeybadger_hooks#create'
   post 'travis_hooks', to: 'travis_hooks#create'
   get 'v1/hooks/', to: 'api/v1/hooks#index'
+  get 'v1/authenticate', to: 'api/v1/authenticate#show'
 end
