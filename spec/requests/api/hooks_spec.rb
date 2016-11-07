@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'GET /v1/hooks' do
   context 'without a token' do
-    it 'it returns an empty 404 response' do
+    it 'returns an empty 404 response' do
       hook = FactoryGirl.create :hook
 
       get '/v1/hooks.json'
@@ -13,7 +13,7 @@ describe 'GET /v1/hooks' do
   end
 
   context 'with an invalid token' do
-    it 'it returns an empty 404 response' do
+    it 'returns an empty 404 response' do
       hook = FactoryGirl.create :hook
 
       get '/v1/hooks.json', params: { token: 'invalid' }
@@ -24,7 +24,7 @@ describe 'GET /v1/hooks' do
   end
 
   context 'with a valid token' do
-    it 'something' do
+    it 'returns the hooks for that user' do
       hook = FactoryGirl.create :hook
       user = FactoryGirl.create :user
 
