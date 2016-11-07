@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -e
+remote="${1:-staging}"
+
+capture() {
+  heroku pg:backups capture --remote $1
+}
+
+url() {
+  heroku pg:backups public-url --remote $1
+}
+
+if [ $remote = clone ]; then
+  capture production
+  heroku pg:backups restore `url production` DATABASE --remote staging --confirm uplink-staging
+else
+  capture $remote
+  curl -o snapshot.sql `url $remote`
+  pg_restore --verbose --clean --no-acl --no-owner -d uplink_development snapshot.sql
+  rm -f snapshot.sql
+fi
