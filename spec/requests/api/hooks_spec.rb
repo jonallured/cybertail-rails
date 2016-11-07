@@ -3,8 +3,7 @@ require 'rails_helper'
 describe 'GET /v1/hooks' do
   context 'without a token' do
     it 'it returns an empty 404 response' do
-      travis_service = Service.create name: 'Travis CI'
-      hook = FactoryGirl.create :hook, service: travis_service
+      hook = FactoryGirl.create :hook
 
       get '/v1/hooks.json'
 
@@ -15,8 +14,7 @@ describe 'GET /v1/hooks' do
 
   context 'with an invalid token' do
     it 'it returns an empty 404 response' do
-      travis_service = Service.create name: 'Travis CI'
-      hook = FactoryGirl.create :hook, service: travis_service
+      hook = FactoryGirl.create :hook
 
       get '/v1/hooks.json', params: { token: 'invalid' }
 
@@ -27,8 +25,7 @@ describe 'GET /v1/hooks' do
 
   context 'with a valid token' do
     it 'something' do
-      travis_service = Service.create name: 'Travis CI'
-      hook = FactoryGirl.create :hook, service: travis_service
+      hook = FactoryGirl.create :hook
       user = FactoryGirl.create :user
 
       get '/v1/hooks.json', params: { token: user.token }
@@ -38,8 +35,8 @@ describe 'GET /v1/hooks' do
       response_json = JSON.parse response.body
       expect(response_json).to eq([
         {
-          'service_id' => travis_service.id,
-          'project' => hook.project,
+          'service_id' => hook.project.service.id,
+          'project_name' => hook.project.name,
           'message' => hook.message,
           'url' => hook.url,
           'sent_at' => hook.sent_at.as_json

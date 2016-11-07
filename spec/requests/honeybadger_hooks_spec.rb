@@ -18,10 +18,11 @@ describe 'Honeybadger hooks' do
     post '/honeybadger_hooks', params: params
 
     expect(Hook.count).to eq 1
+    expect(Project.count).to eq 1
 
     hook = Hook.first
-    expect(hook.service).to eq honeybadger_service
-    expect(hook.project).to eq "Uplink"
+    expect(hook.service_id).to eq honeybadger_service.id
+    expect(hook.project_name).to eq "Uplink"
     expect(hook.message).to eq "RuntimeError: Something went horribly wrong"
     expect(hook.url).to eq "https://app.honeybadger.io/projects/123/faults/456"
   end

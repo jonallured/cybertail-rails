@@ -22,10 +22,11 @@ describe 'Travis hooks' do
     post '/travis_hooks', params: params
 
     expect(Hook.count).to eq 1
+    expect(Project.count).to eq 1
 
     hook = Hook.first
-    expect(hook.service).to eq travis_service
-    expect(hook.project).to eq "jonallured/uplink-rails"
+    expect(hook.service_id).to eq travis_service.id
+    expect(hook.project_name).to eq "jonallured/uplink-rails"
     expect(hook.message).to eq "build #1 by Jon Allured passed"
     expect(hook.url).to eq "https://travis-ci.org/"
   end

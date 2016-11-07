@@ -19,8 +19,8 @@ describe 'GitHub hooks' do
 
       hook = Hook.first
       expect(hook).to_not be_suppress
-      expect(hook.service).to eq github_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq github_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq "Got event unknown, saved as Hook #{hook.id}."
       expect(hook.url).to eq "https://github.com"
     end
@@ -44,8 +44,8 @@ describe 'GitHub hooks' do
 
       hook = Hook.first
       expect(hook).to be_suppress
-      expect(hook.service).to eq github_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq github_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq nil
       expect(hook.url).to eq nil
     end
@@ -72,8 +72,8 @@ describe 'GitHub hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq github_service
-      expect(hook.project).to eq 'jonallured/uplink-rails'
+      expect(hook.service_id).to eq github_service.id
+      expect(hook.project_name).to eq 'jonallured/uplink-rails'
       expect(hook.message).to eq 'jonallured created branch "tmp"'
       expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails/tree/tmp'
     end
@@ -100,8 +100,8 @@ describe 'GitHub hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq github_service
-      expect(hook.project).to eq 'jonallured/uplink-rails'
+      expect(hook.service_id).to eq github_service.id
+      expect(hook.project_name).to eq 'jonallured/uplink-rails'
       expect(hook.message).to eq 'jonallured deleted branch "tmp"'
       expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails'
     end
@@ -128,8 +128,8 @@ describe 'GitHub hooks' do
 
         hook = Hook.first
         expect(hook).to be_suppress
-        expect(hook.service).to eq github_service
-        expect(hook.project).to eq "jonallured/uplink-rails"
+        expect(hook.service_id).to eq github_service.id
+        expect(hook.project_name).to eq "jonallured/uplink-rails"
         expect(hook.message).to eq "jonallured pushed 0 commits to master"
         expect(hook.url).to eq "https://github.com/jonallured/uplink-rails/compare/sha1...sha2"
       end
@@ -154,8 +154,8 @@ describe 'GitHub hooks' do
         expect(Hook.count).to eq 1
 
         hook = Hook.first
-        expect(hook.service).to eq github_service
-        expect(hook.project).to eq "jonallured/uplink-rails"
+        expect(hook.service_id).to eq github_service.id
+        expect(hook.project_name).to eq "jonallured/uplink-rails"
         expect(hook.message).to eq "jonallured pushed 2 commits to master"
         expect(hook.url).to eq "https://github.com/jonallured/uplink-rails/compare/sha1...sha2"
       end
@@ -180,8 +180,8 @@ describe 'GitHub hooks' do
 
         hook = Hook.first
         expect(hook).to be_suppress
-        expect(hook.service).to eq github_service
-        expect(hook.project).to eq 'jonallured/uplink-rails'
+        expect(hook.service_id).to eq github_service.id
+        expect(hook.project_name).to eq 'jonallured/uplink-rails'
         expect(hook.message).to eq nil
         expect(hook.url).to eq nil
       end
@@ -204,8 +204,8 @@ describe 'GitHub hooks' do
 
         hook = Hook.first
         expect(hook).to be_suppress
-        expect(hook.service).to eq github_service
-        expect(hook.project).to eq 'jonallured/uplink-rails'
+        expect(hook.service_id).to eq github_service.id
+        expect(hook.project_name).to eq 'jonallured/uplink-rails'
         expect(hook.message).to eq nil
         expect(hook.url).to eq nil
       end
@@ -230,8 +230,8 @@ describe 'GitHub hooks' do
         expect(Hook.count).to eq 1
 
         hook = Hook.first
-        expect(hook.service).to eq github_service
-        expect(hook.project).to eq "jonallured/uplink-rails"
+        expect(hook.service_id).to eq github_service.id
+        expect(hook.project_name).to eq "jonallured/uplink-rails"
         expect(hook.message).to eq "jonallured pushed 2 commits to master"
         expect(hook.url).to eq "https://github.com/jonallured/uplink-rails/compare/sha1...sha2"
       end
@@ -258,8 +258,8 @@ describe 'GitHub hooks' do
         expect(Hook.count).to eq 1
 
         hook = Hook.first
-        expect(hook.service).to eq github_service
-        expect(hook.project).to eq 'jonallured/uplink-rails'
+        expect(hook.service_id).to eq github_service.id
+        expect(hook.project_name).to eq 'jonallured/uplink-rails'
         expect(hook.message).to eq 'jonallured started watching'
         expect(hook.url).to eq 'https://github.com/jonallured'
       end
@@ -287,8 +287,8 @@ describe 'GitHub hooks' do
           expect(Hook.count).to eq 1
 
           hook = Hook.first
-          expect(hook.service).to eq github_service
-          expect(hook.project).to eq 'jonallured/uplink-rails'
+          expect(hook.service_id).to eq github_service.id
+          expect(hook.project_name).to eq 'jonallured/uplink-rails'
           expect(hook.message).to eq 'jonallured opened #1: "Something is broken"'
           expect(hook.url).to eq 'https://github.com/jonallured/uplink-ios/issues/1'
         end
@@ -319,8 +319,8 @@ describe 'GitHub hooks' do
           expect(Hook.count).to eq 1
 
           hook = Hook.first
-          expect(hook.service).to eq github_service
-          expect(hook.project).to eq 'jonallured/uplink-rails'
+          expect(hook.service_id).to eq github_service.id
+          expect(hook.project_name).to eq 'jonallured/uplink-rails'
           expect(hook.message).to eq 'jonallured commented on #1: "Something is broken"'
           expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails/issues/1#issuecomment-123456'
         end

@@ -24,8 +24,8 @@ describe 'Circle CI Hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq circle_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq circle_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq "build #1 by Jon Allured canceled"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -39,8 +39,8 @@ describe 'Circle CI Hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq circle_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq circle_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -54,8 +54,8 @@ describe 'Circle CI Hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq circle_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq circle_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -69,8 +69,8 @@ describe 'Circle CI Hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq circle_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq circle_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -84,8 +84,8 @@ describe 'Circle CI Hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq circle_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq circle_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -99,8 +99,8 @@ describe 'Circle CI Hooks' do
       expect(Hook.count).to eq 1
 
       hook = Hook.first
-      expect(hook.service).to eq circle_service
-      expect(hook.project).to eq "jonallured/uplink-rails"
+      expect(hook.service_id).to eq circle_service.id
+      expect(hook.project_name).to eq "jonallured/uplink-rails"
       expect(hook.message).to eq "build #1 by Jon Allured passed"
       expect(hook.url).to eq "https://circleci.com/"
     end

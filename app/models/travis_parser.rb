@@ -16,7 +16,6 @@ class TravisParser
 
   def hook_params
     {
-      service: Service.travis,
       payload: @params,
       project: project,
       message: message,
@@ -25,12 +24,20 @@ class TravisParser
     }
   end
 
+  def service
+    Service.travis
+  end
+
   def repository
     @params[:repository]
   end
 
-  def project
+  def project_name
     [repository[:owner_name], repository[:name]].join('/')
+  end
+
+  def project
+    @project ||= service.projects.find_or_create_by name: project_name
   end
 
   def message

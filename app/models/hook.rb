@@ -1,4 +1,12 @@
 class Hook < ActiveRecord::Base
-  belongs_to :service
-  validates_presence_of :payload, :project, :sent_at
+  belongs_to :project
+  validates_presence_of :payload, :sent_at
+
+  def service_id
+    project.service.id
+  end
+
+  def project_name
+    project.name
+  end
 end

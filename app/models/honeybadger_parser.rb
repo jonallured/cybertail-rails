@@ -15,7 +15,6 @@ class HoneybadgerParser
 
   def hook_params
     {
-      service: Service.honeybadger,
       payload: @params,
       project: project,
       message: message,
@@ -24,8 +23,16 @@ class HoneybadgerParser
     }
   end
 
-  def project
+  def service
+    Service.honeybadger
+  end
+
+  def project_name
     @params[:project][:name]
+  end
+
+  def project
+    @project ||= service.projects.find_or_create_by name: project_name
   end
 
   def message

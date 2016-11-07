@@ -19,12 +19,23 @@ module GithubService
       {
         message: message,
         payload: @params.to_unsafe_hash,
-        project: @params[:repository][:full_name],
+        project: project,
         sent_at: Time.now,
-        service: Service.github,
         suppress: suppress,
         url: url
       }
+    end
+
+    def service
+      Service.github
+    end
+
+    def project_name
+      @params[:repository][:full_name]
+    end
+
+    def project
+      @project ||= service.projects.find_or_create_by name: project_name
     end
 
     def message

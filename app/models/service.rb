@@ -1,5 +1,5 @@
 class Service < ActiveRecord::Base
-  has_many :hooks
+  has_many :projects
   validates_presence_of :name
 
   def self.circle

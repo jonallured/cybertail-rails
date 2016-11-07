@@ -15,7 +15,6 @@ class CircleParser
 
   def hook_params
     {
-      service: Service.circle,
       payload: @params,
       project: project,
       message: message,
@@ -24,8 +23,16 @@ class CircleParser
     }
   end
 
-  def project
+  def service
+    Service.circle
+  end
+
+  def project_name
     [@params[:username], @params[:reponame]].join('/')
+  end
+
+  def project
+    @project ||= service.projects.find_or_create_by name: project_name
   end
 
   def message

@@ -15,13 +15,24 @@ class HerokuParser
 
   def hook_params
     {
-      service: Service.heroku,
       payload: @params,
-      project: @params[:app],
+      project: project,
       message: message,
       url: url,
       sent_at: Time.now
     }
+  end
+
+  def service
+    Service.heroku
+  end
+
+  def project_name
+    @params[:app]
+  end
+
+  def project
+    @project ||= service.projects.find_or_create_by name: project_name
   end
 
   def message
