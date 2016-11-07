@@ -1,4 +1,4 @@
-class Hook < ActiveRecord::Base
+class Hook < ApplicationRecord
   belongs_to :project
   validates_presence_of :payload, :sent_at
 
