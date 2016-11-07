@@ -1,8 +1,14 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :validatable
 
+  has_many :subscriptions
+
   before_validation :set_token
   validates_presence_of :token
+
+  def hooks
+    subscriptions.map(&:hooks).flatten
+  end
 
   private
 

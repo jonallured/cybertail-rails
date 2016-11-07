@@ -1,6 +1,6 @@
 class Api::V1::HooksController < ApplicationController
   before_action :ensure_user
-  expose(:hooks) { Hook.where(suppress: false) }
+  expose(:hooks) { current_user.hooks }
 
   private
 
