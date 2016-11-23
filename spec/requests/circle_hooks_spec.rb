@@ -10,7 +10,7 @@ describe 'Circle CI Hooks' do
       outcome: outcome,
       build_url: 'https://circleci.com/',
       username: 'jonallured',
-      reponame: 'uplink-rails'
+      reponame: 'cybertail-rails'
     }
   end
 
@@ -25,7 +25,7 @@ describe 'Circle CI Hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq circle_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq "build #1 by Jon Allured canceled"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -40,7 +40,7 @@ describe 'Circle CI Hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq circle_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -55,7 +55,7 @@ describe 'Circle CI Hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq circle_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -70,7 +70,7 @@ describe 'Circle CI Hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq circle_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -85,7 +85,7 @@ describe 'Circle CI Hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq circle_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq "build #1 by Jon Allured failed"
       expect(hook.url).to eq "https://circleci.com/"
     end
@@ -100,7 +100,7 @@ describe 'Circle CI Hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq circle_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq "build #1 by Jon Allured passed"
       expect(hook.url).to eq "https://circleci.com/"
     end

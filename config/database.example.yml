@@ -3,9 +3,9 @@ global: &global
   encoding: unicode
 
 development:
-  database: uplink_development
+  database: cybertail_development
   <<: *global
 
 test:
-  database: uplink_test
+  database: cybertail_test
   <<: *global

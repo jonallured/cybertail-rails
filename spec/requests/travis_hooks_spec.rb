@@ -11,7 +11,7 @@ describe 'Travis hooks' do
       build_url: 'https://travis-ci.org/',
       repository: {
         owner_name: 'jonallured',
-        name: 'uplink-rails'
+        name: 'cybertail-rails'
       }
     }
 
@@ -26,7 +26,7 @@ describe 'Travis hooks' do
 
     hook = Hook.first
     expect(hook.service_id).to eq travis_service.id
-    expect(hook.project_name).to eq "jonallured/uplink-rails"
+    expect(hook.project_name).to eq "jonallured/cybertail-rails"
     expect(hook.message).to eq "build #1 by Jon Allured passed"
     expect(hook.url).to eq "https://travis-ci.org/"
   end

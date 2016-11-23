@@ -12,10 +12,10 @@ url() {
 
 if [ $remote = clone ]; then
   capture production
-  heroku pg:backups restore `url production` DATABASE --remote staging --confirm uplink-staging
+  heroku pg:backups restore `url production` DATABASE --remote staging --confirm cybertail-staging
 else
   capture $remote
   curl -o snapshot.sql `url $remote`
-  pg_restore --verbose --clean --no-acl --no-owner -d uplink_development snapshot.sql
+  pg_restore --verbose --clean --no-acl --no-owner -d cybertail_development snapshot.sql
   rm -f snapshot.sql
 fi

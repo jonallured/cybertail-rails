@@ -6,7 +6,7 @@ describe 'Honeybadger hooks' do
 
     params = {
       project: {
-        name: 'Uplink'
+        name: 'Cybertail'
       },
       fault: {
         klass: 'RuntimeError',
@@ -22,7 +22,7 @@ describe 'Honeybadger hooks' do
 
     hook = Hook.first
     expect(hook.service_id).to eq honeybadger_service.id
-    expect(hook.project_name).to eq "Uplink"
+    expect(hook.project_name).to eq "Cybertail"
     expect(hook.message).to eq "RuntimeError: Something went horribly wrong"
     expect(hook.url).to eq "https://app.honeybadger.io/projects/123/faults/456"
   end

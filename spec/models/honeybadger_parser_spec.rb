@@ -7,7 +7,7 @@ describe HoneybadgerParser do
         Service.create name: 'Honeybadger'
 
         params = {
-          project: { name: 'uplink-rails' },
+          project: { name: 'cybertail-rails' },
           fault: {}
         }
         HoneybadgerParser.parse(params)
@@ -18,17 +18,17 @@ describe HoneybadgerParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'uplink-rails'
+        expect(project.name).to eq 'cybertail-rails'
       end
     end
 
     context 'with an existing project' do
       it 'creates a hook for that project' do
         service = Service.create name: 'Honeybadger'
-        project = service.projects.create name: 'uplink-rails'
+        project = service.projects.create name: 'cybertail-rails'
 
         params = {
-          project: { name: 'uplink-rails' },
+          project: { name: 'cybertail-rails' },
           fault: {}
         }
         HoneybadgerParser.parse(params)
@@ -39,7 +39,7 @@ describe HoneybadgerParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'uplink-rails'
+        expect(project.name).to eq 'cybertail-rails'
       end
     end
   end

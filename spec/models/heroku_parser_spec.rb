@@ -7,7 +7,7 @@ describe HerokuParser do
         Service.create name: 'Heroku'
 
         params = {
-          app: 'uplink-rails'
+          app: 'cybertail-rails'
         }
         HerokuParser.parse(params)
 
@@ -17,14 +17,14 @@ describe HerokuParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'uplink-rails'
+        expect(project.name).to eq 'cybertail-rails'
       end
     end
 
     context 'with an existing project' do
       it 'creates a hook for that project' do
         service = Service.create name: 'Heroku'
-        project = service.projects.create name: 'uplink-rails'
+        project = service.projects.create name: 'cybertail-rails'
 
         params = {
           app: project.name
@@ -37,7 +37,7 @@ describe HerokuParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'uplink-rails'
+        expect(project.name).to eq 'cybertail-rails'
       end
     end
   end

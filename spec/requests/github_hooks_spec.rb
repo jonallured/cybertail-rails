@@ -7,7 +7,7 @@ describe 'GitHub hooks' do
 
       params = {
         repository: {
-          full_name: 'jonallured/uplink-rails'
+          full_name: 'jonallured/cybertail-rails'
         }
       }
 
@@ -20,7 +20,7 @@ describe 'GitHub hooks' do
       hook = Hook.first
       expect(hook).to_not be_suppress
       expect(hook.service_id).to eq github_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq "Got event unknown, saved as Hook #{hook.id}."
       expect(hook.url).to eq "https://github.com"
     end
@@ -32,7 +32,7 @@ describe 'GitHub hooks' do
 
       params = {
         repository: {
-          full_name: 'jonallured/uplink-rails'
+          full_name: 'jonallured/cybertail-rails'
         }
       }
 
@@ -45,7 +45,7 @@ describe 'GitHub hooks' do
       hook = Hook.first
       expect(hook).to be_suppress
       expect(hook.service_id).to eq github_service.id
-      expect(hook.project_name).to eq "jonallured/uplink-rails"
+      expect(hook.project_name).to eq "jonallured/cybertail-rails"
       expect(hook.message).to eq nil
       expect(hook.url).to eq nil
     end
@@ -60,8 +60,8 @@ describe 'GitHub hooks' do
         ref: 'tmp',
         ref_type: 'branch',
         repository: {
-          full_name: 'jonallured/uplink-rails',
-          html_url: 'https://github.com/jonallured/uplink-rails'
+          full_name: 'jonallured/cybertail-rails',
+          html_url: 'https://github.com/jonallured/cybertail-rails'
         }
       }
 
@@ -73,9 +73,9 @@ describe 'GitHub hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq github_service.id
-      expect(hook.project_name).to eq 'jonallured/uplink-rails'
+      expect(hook.project_name).to eq 'jonallured/cybertail-rails'
       expect(hook.message).to eq 'jonallured created branch "tmp"'
-      expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails/tree/tmp'
+      expect(hook.url).to eq 'https://github.com/jonallured/cybertail-rails/tree/tmp'
     end
   end
 
@@ -88,8 +88,8 @@ describe 'GitHub hooks' do
         ref: 'tmp',
         ref_type: 'branch',
         repository: {
-          full_name: 'jonallured/uplink-rails',
-          html_url: 'https://github.com/jonallured/uplink-rails'
+          full_name: 'jonallured/cybertail-rails',
+          html_url: 'https://github.com/jonallured/cybertail-rails'
         }
       }
 
@@ -101,9 +101,9 @@ describe 'GitHub hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq github_service.id
-      expect(hook.project_name).to eq 'jonallured/uplink-rails'
+      expect(hook.project_name).to eq 'jonallured/cybertail-rails'
       expect(hook.message).to eq 'jonallured deleted branch "tmp"'
-      expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails'
+      expect(hook.url).to eq 'https://github.com/jonallured/cybertail-rails'
     end
   end
 
@@ -114,10 +114,10 @@ describe 'GitHub hooks' do
 
         params = {
           commits: [],
-          compare: "https://github.com/jonallured/uplink-rails/compare/sha1...sha2",
+          compare: "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2",
           pusher: { name: 'jonallured' },
           ref: 'refs/heads/master',
-          repository: { full_name: 'jonallured/uplink-rails' }
+          repository: { full_name: 'jonallured/cybertail-rails' }
         }
 
         headers = { 'X-GitHub-Event' => 'push' }
@@ -129,9 +129,9 @@ describe 'GitHub hooks' do
         hook = Hook.first
         expect(hook).to be_suppress
         expect(hook.service_id).to eq github_service.id
-        expect(hook.project_name).to eq "jonallured/uplink-rails"
+        expect(hook.project_name).to eq "jonallured/cybertail-rails"
         expect(hook.message).to eq "jonallured pushed 0 commits to master"
-        expect(hook.url).to eq "https://github.com/jonallured/uplink-rails/compare/sha1...sha2"
+        expect(hook.url).to eq "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2"
       end
     end
 
@@ -141,10 +141,10 @@ describe 'GitHub hooks' do
 
         params = {
           commits: [ 'a', 'b' ],
-          compare: "https://github.com/jonallured/uplink-rails/compare/sha1...sha2",
+          compare: "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2",
           pusher: { name: 'jonallured' },
           ref: 'refs/heads/master',
-          repository: { full_name: 'jonallured/uplink-rails' }
+          repository: { full_name: 'jonallured/cybertail-rails' }
         }
 
         headers = { 'X-GitHub-Event' => 'push' }
@@ -155,9 +155,9 @@ describe 'GitHub hooks' do
 
         hook = Hook.first
         expect(hook.service_id).to eq github_service.id
-        expect(hook.project_name).to eq "jonallured/uplink-rails"
+        expect(hook.project_name).to eq "jonallured/cybertail-rails"
         expect(hook.message).to eq "jonallured pushed 2 commits to master"
-        expect(hook.url).to eq "https://github.com/jonallured/uplink-rails/compare/sha1...sha2"
+        expect(hook.url).to eq "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2"
       end
     end
   end
@@ -169,7 +169,7 @@ describe 'GitHub hooks' do
 
         params = {
           context: 'continuous-integration/travis-ci/push',
-          repository: { full_name: 'jonallured/uplink-rails' }
+          repository: { full_name: 'jonallured/cybertail-rails' }
         }
 
         headers = { 'X-GitHub-Event' => 'status' }
@@ -181,7 +181,7 @@ describe 'GitHub hooks' do
         hook = Hook.first
         expect(hook).to be_suppress
         expect(hook.service_id).to eq github_service.id
-        expect(hook.project_name).to eq 'jonallured/uplink-rails'
+        expect(hook.project_name).to eq 'jonallured/cybertail-rails'
         expect(hook.message).to eq nil
         expect(hook.url).to eq nil
       end
@@ -193,7 +193,7 @@ describe 'GitHub hooks' do
 
         params = {
           context: 'continuous-integration/travis-ci/pr',
-          repository: { full_name: 'jonallured/uplink-rails' }
+          repository: { full_name: 'jonallured/cybertail-rails' }
         }
 
         headers = { 'X-GitHub-Event' => 'status' }
@@ -205,7 +205,7 @@ describe 'GitHub hooks' do
         hook = Hook.first
         expect(hook).to be_suppress
         expect(hook.service_id).to eq github_service.id
-        expect(hook.project_name).to eq 'jonallured/uplink-rails'
+        expect(hook.project_name).to eq 'jonallured/cybertail-rails'
         expect(hook.message).to eq nil
         expect(hook.url).to eq nil
       end
@@ -217,10 +217,10 @@ describe 'GitHub hooks' do
 
         params = {
           commits: [ 'a', 'b' ],
-          compare: "https://github.com/jonallured/uplink-rails/compare/sha1...sha2",
+          compare: "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2",
           pusher: { name: 'jonallured' },
           ref: 'refs/heads/master',
-          repository: { full_name: 'jonallured/uplink-rails' }
+          repository: { full_name: 'jonallured/cybertail-rails' }
         }
 
         headers = { 'X-GitHub-Event' => 'push' }
@@ -231,9 +231,9 @@ describe 'GitHub hooks' do
 
         hook = Hook.first
         expect(hook.service_id).to eq github_service.id
-        expect(hook.project_name).to eq "jonallured/uplink-rails"
+        expect(hook.project_name).to eq "jonallured/cybertail-rails"
         expect(hook.message).to eq "jonallured pushed 2 commits to master"
-        expect(hook.url).to eq "https://github.com/jonallured/uplink-rails/compare/sha1...sha2"
+        expect(hook.url).to eq "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2"
       end
     end
   end
@@ -248,7 +248,7 @@ describe 'GitHub hooks' do
             login: 'jonallured',
             html_url: 'https://github.com/jonallured'
           },
-          repository: { full_name: 'jonallured/uplink-rails' }
+          repository: { full_name: 'jonallured/cybertail-rails' }
         }
 
         headers = { 'X-GitHub-Event' => 'watch' }
@@ -259,7 +259,7 @@ describe 'GitHub hooks' do
 
         hook = Hook.first
         expect(hook.service_id).to eq github_service.id
-        expect(hook.project_name).to eq 'jonallured/uplink-rails'
+        expect(hook.project_name).to eq 'jonallured/cybertail-rails'
         expect(hook.message).to eq 'jonallured started watching'
         expect(hook.url).to eq 'https://github.com/jonallured'
       end
@@ -274,10 +274,10 @@ describe 'GitHub hooks' do
             issue: {
               number: '1',
               title: 'Something is broken',
-              html_url: 'https://github.com/jonallured/uplink-ios/issues/1'
+              html_url: 'https://github.com/jonallured/cybertail-ios/issues/1'
             },
             sender: { login: 'jonallured' },
-            repository: { full_name: 'jonallured/uplink-rails' }
+            repository: { full_name: 'jonallured/cybertail-rails' }
           }
 
           headers = { 'X-GitHub-Event' => 'issues' }
@@ -288,9 +288,9 @@ describe 'GitHub hooks' do
 
           hook = Hook.first
           expect(hook.service_id).to eq github_service.id
-          expect(hook.project_name).to eq 'jonallured/uplink-rails'
+          expect(hook.project_name).to eq 'jonallured/cybertail-rails'
           expect(hook.message).to eq 'jonallured opened #1: "Something is broken"'
-          expect(hook.url).to eq 'https://github.com/jonallured/uplink-ios/issues/1'
+          expect(hook.url).to eq 'https://github.com/jonallured/cybertail-ios/issues/1'
         end
       end
     end
@@ -302,14 +302,14 @@ describe 'GitHub hooks' do
 
           params = {
             comment: {
-              html_url: 'https://github.com/jonallured/uplink-rails/issues/1#issuecomment-123456'
+              html_url: 'https://github.com/jonallured/cybertail-rails/issues/1#issuecomment-123456'
             },
             issue: {
               number: '1',
               title: 'Something is broken',
             },
             sender: { login: 'jonallured' },
-            repository: { full_name: 'jonallured/uplink-rails' }
+            repository: { full_name: 'jonallured/cybertail-rails' }
           }
 
           headers = { 'X-GitHub-Event' => 'issue_comment' }
@@ -320,9 +320,9 @@ describe 'GitHub hooks' do
 
           hook = Hook.first
           expect(hook.service_id).to eq github_service.id
-          expect(hook.project_name).to eq 'jonallured/uplink-rails'
+          expect(hook.project_name).to eq 'jonallured/cybertail-rails'
           expect(hook.message).to eq 'jonallured commented on #1: "Something is broken"'
-          expect(hook.url).to eq 'https://github.com/jonallured/uplink-rails/issues/1#issuecomment-123456'
+          expect(hook.url).to eq 'https://github.com/jonallured/cybertail-rails/issues/1#issuecomment-123456'
         end
       end
     end

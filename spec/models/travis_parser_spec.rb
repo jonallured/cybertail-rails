@@ -9,7 +9,7 @@ describe TravisParser do
         payload = {
           repository: {
             owner_name: 'jonallured',
-            name: 'uplink-rails'
+            name: 'cybertail-rails'
           },
           result_message: 'passed'
         }
@@ -21,19 +21,19 @@ describe TravisParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/uplink-rails'
+        expect(project.name).to eq 'jonallured/cybertail-rails'
       end
     end
 
     context 'with an existing project' do
       it 'creates a hook for that project' do
         service = Service.create name: 'Travis CI'
-        project = service.projects.create name: 'jonallured/uplink-rails'
+        project = service.projects.create name: 'jonallured/cybertail-rails'
 
         payload = {
           repository: {
             owner_name: 'jonallured',
-            name: 'uplink-rails'
+            name: 'cybertail-rails'
           },
           result_message: 'passed'
         }
@@ -45,7 +45,7 @@ describe TravisParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/uplink-rails'
+        expect(project.name).to eq 'jonallured/cybertail-rails'
       end
     end
   end

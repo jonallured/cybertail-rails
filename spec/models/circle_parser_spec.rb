@@ -9,7 +9,7 @@ describe CircleParser do
         params = {
           payload: {
             username: 'jonallured',
-            reponame: 'uplink-rails'
+            reponame: 'cybertail-rails'
           }
         }
         CircleParser.parse(params)
@@ -20,19 +20,19 @@ describe CircleParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/uplink-rails'
+        expect(project.name).to eq 'jonallured/cybertail-rails'
       end
     end
 
     context 'with an existing project' do
       it 'creates a hook for that project' do
         service = Service.create name: 'Circle CI'
-        project = service.projects.create name: 'jonallured/uplink-rails'
+        project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
           payload: {
             username: 'jonallured',
-            reponame: 'uplink-rails'
+            reponame: 'cybertail-rails'
           }
         }
         CircleParser.parse(params)
@@ -43,7 +43,7 @@ describe CircleParser do
         hook = Hook.first
         project = Project.first
         expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/uplink-rails'
+        expect(project.name).to eq 'jonallured/cybertail-rails'
       end
     end
   end
