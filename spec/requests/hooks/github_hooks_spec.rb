@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-describe 'GitHub hooks' do
-  before(:each) do
-    host! "hooks.example.com"
-  end
-
+describe 'GitHub hooks', subdomain: 'hooks' do
   let(:service) { FactoryGirl.create :github_service }
 
   context 'unknown event' do

@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-describe 'Heroku hooks' do
-  before(:each) do
-    host! "hooks.example.com"
-  end
-
+describe 'Heroku hooks', subdomain: 'hooks' do
   it 'something' do
     service = FactoryGirl.create :heroku_service
     project = service.projects.create name: 'cybertail'

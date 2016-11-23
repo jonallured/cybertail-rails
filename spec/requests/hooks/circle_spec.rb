@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-describe 'Circle CI Hooks' do
-  before(:each) do
-    host! "hooks.example.com"
-  end
-
+describe 'Circle CI Hooks', subdomain: 'hooks' do
   let(:service) { FactoryGirl.create :circle_service }
 
   let(:project) { service.projects.create name: 'jonallured/cybertail-rails' }
