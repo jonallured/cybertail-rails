@@ -6,7 +6,7 @@ describe 'Honeybadger hooks' do
   end
 
   it 'something' do
-    service = Service.create name: 'Honeybadger'
+    service = FactoryGirl.create :honeybadger_service
     project = service.projects.create name: 'Cybertail'
 
     params = {

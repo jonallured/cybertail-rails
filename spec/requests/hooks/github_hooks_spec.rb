@@ -5,9 +5,10 @@ describe 'GitHub hooks' do
     host! "hooks.example.com"
   end
 
+  let(:service) { FactoryGirl.create :github_service }
+
   context 'unknown event' do
     it 'creates a general hook' do
-      service = Service.create name: 'GitHub'
       project = service.projects.create name: 'jonallured/cybertail-rails'
 
       params = {
@@ -32,7 +33,6 @@ describe 'GitHub hooks' do
 
   context 'ping event' do
     it 'creates a suppressed hook' do
-      service = Service.create name: 'GitHub'
       project = service.projects.create name: 'jonallured/cybertail-rails'
 
       params = {
@@ -57,7 +57,6 @@ describe 'GitHub hooks' do
 
   context 'create event' do
     it 'something' do
-      service = Service.create name: 'GitHub'
       project = service.projects.create name: 'jonallured/cybertail-rails'
 
       params = {
@@ -85,7 +84,6 @@ describe 'GitHub hooks' do
 
   context 'delete event' do
     it 'something' do
-      service = Service.create name: 'GitHub'
       project = service.projects.create name: 'jonallured/cybertail-rails'
 
       params = {
@@ -114,7 +112,6 @@ describe 'GitHub hooks' do
   context 'push event' do
     context 'with no commits' do
       it 'creates a suppressed GitHub push Hook' do
-        service = Service.create name: 'GitHub'
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
@@ -141,7 +138,6 @@ describe 'GitHub hooks' do
 
     context 'with some commits' do
       it 'creates a GitHub push Hook' do
-        service = Service.create name: 'GitHub'
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
@@ -169,7 +165,6 @@ describe 'GitHub hooks' do
   context 'travis status event' do
     context 'travis push' do
       it 'creates a suppressed GitHub travis Hook' do
-        service = Service.create name: 'GitHub'
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
@@ -193,7 +188,6 @@ describe 'GitHub hooks' do
 
     context 'travis pr' do
       it 'creates a suppressed GitHub travis Hook' do
-        service = Service.create name: 'GitHub'
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
@@ -217,7 +211,6 @@ describe 'GitHub hooks' do
 
     context 'with some commits' do
       it 'creates a GitHub push Hook' do
-        service = Service.create name: 'GitHub'
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
@@ -245,7 +238,6 @@ describe 'GitHub hooks' do
   context 'watching' do
     context 'create' do
       it 'creates a Hook' do
-        service = Service.create name: 'GitHub'
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
@@ -272,7 +264,6 @@ describe 'GitHub hooks' do
     context 'issues' do
       context 'create' do
         it 'creates a Hook' do
-          service = Service.create name: 'GitHub'
           project = service.projects.create name: 'jonallured/cybertail-rails'
 
           params = {
@@ -302,7 +293,6 @@ describe 'GitHub hooks' do
     context 'issue comments' do
       context 'create' do
         it 'creates a Hook' do
-          service = Service.create name: 'GitHub'
           project = service.projects.create name: 'jonallured/cybertail-rails'
 
           params = {

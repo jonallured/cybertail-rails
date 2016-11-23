@@ -6,7 +6,7 @@ describe 'Travis hooks' do
   end
 
   it 'something' do
-    service = Service.create name: 'Travis CI'
+    service = FactoryGirl.create :travis_service
     project = service.projects.create name: 'jonallured/cybertail-rails'
 
     payload = {

@@ -6,7 +6,7 @@ describe 'Heroku hooks' do
   end
 
   it 'something' do
-    service = Service.create name: 'Heroku'
+    service = FactoryGirl.create :heroku_service
     project = service.projects.create name: 'cybertail'
 
     params = {

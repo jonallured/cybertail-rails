@@ -5,7 +5,7 @@ describe 'Circle CI Hooks' do
     host! "hooks.example.com"
   end
 
-  let(:service) { Service.create name: 'Circle CI' }
+  let(:service) { FactoryGirl.create :circle_service }
 
   let(:project) { service.projects.create name: 'jonallured/cybertail-rails' }
 
