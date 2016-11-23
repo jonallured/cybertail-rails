@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'GET /v1/hooks' do
+describe 'GET /v1/hooks', subdomain: 'api' do
   context 'without a token' do
     it 'returns an empty 404 response' do
       hook = FactoryGirl.create :hook

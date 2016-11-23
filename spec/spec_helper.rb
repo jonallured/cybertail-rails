@@ -17,6 +17,10 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.before(:each, subdomain: 'api') do
+    host! "api.example.com"
+  end
+
   config.before(:each, subdomain: 'hooks') do
     host! "hooks.example.com"
   end

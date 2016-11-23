@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'GET /v1/authenticate' do
+describe 'GET /v1/authenticate', subdomain: 'api' do
   context 'with invalid credentials' do
     it 'returns an empty 404 response' do
       params = { email: 'invalid@example.com', password: 'password' }
