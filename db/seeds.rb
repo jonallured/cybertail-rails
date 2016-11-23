@@ -1,9 +1,9 @@
 services = [
-  { id: 1, name: 'Travis CI' },
-  { id: 2, name: 'Heroku' },
-  { id: 3, name: 'GitHub' },
-  { id: 4, name: 'Honeybadger' },
-  { id: 5, name: 'Circle CI' }
+  { id: 1, name: 'Travis CI', parser: 'TravisParser' },
+  { id: 2, name: 'Heroku', parser: 'HerokuParser' },
+  { id: 3, name: 'GitHub', parser: 'GithubService' },
+  { id: 4, name: 'Honeybadger', parser: 'HoneybadgerParser' },
+  { id: 5, name: 'Circle CI', parser: 'CircleParser' }
 ]
 
 for attrs in services

@@ -1,25 +1,22 @@
 class HooksController < ApplicationController
   protect_from_forgery with: :null_session
 
+  expose :project, find_by: :token, id: :project_token
+
   def create
-    project = Project.find_by token: params[:project_token]
-
-    if project.service == Service.circle
-      CircleParser.parse(params)
-    elsif project.service == Service.heroku
-      HerokuParser.parse(params)
-    elsif project.service == Service.honeybadger
-      HoneybadgerParser.parse(params)
-    elsif project.service == Service.travis
-      TravisParser.parse(params)
-    elsif project.service == Service.github
-      GithubService.parse(github_event, params)
-    end
-
+    parser.parse *args
     head :created
   end
 
   private
+
+  def parser
+    project.service.parser.constantize
+  end
+
+  def args
+    [github_event, params].compact
+  end
 
   def github_event
     request.headers['X-GitHub-Event']
