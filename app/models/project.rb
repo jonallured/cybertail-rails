@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
   belongs_to :service
-  has_many :hooks
-  has_many :subscriptions
+  has_many :hooks, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   before_validation :set_token
   validates_presence_of :name

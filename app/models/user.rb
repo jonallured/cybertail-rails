@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :validatable
 
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
 
   before_validation :set_token
   validates_presence_of :token
