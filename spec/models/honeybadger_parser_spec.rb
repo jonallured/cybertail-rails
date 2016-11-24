@@ -2,45 +2,25 @@ require 'rails_helper'
 
 describe HoneybadgerParser do
   describe '.parse' do
-    context 'without an existing project' do
-      it 'creates a new project and add a new hook to it' do
-        Service.create name: 'Honeybadger'
+    let(:service) { FactoryGirl.create :honeybadger_service }
+    let(:project) { FactoryGirl.create :project, service: service }
 
-        params = {
-          project: { name: 'cybertail-rails' },
-          fault: {}
+    it 'creates a hook' do
+      params = {
+        fault: {
+          klass: 'TerribleError',
+          message: 'Everything is terrible!',
+          url: 'https://app.honeybadger.io/projects/123/faults/456'
         }
-        HoneybadgerParser.parse(params)
+      }
+      HoneybadgerParser.parse(params, project)
 
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
+      expect(Hook.count).to eq 1
 
-        hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'cybertail-rails'
-      end
-    end
-
-    context 'with an existing project' do
-      it 'creates a hook for that project' do
-        service = Service.create name: 'Honeybadger'
-        project = service.projects.create name: 'cybertail-rails'
-
-        params = {
-          project: { name: 'cybertail-rails' },
-          fault: {}
-        }
-        HoneybadgerParser.parse(params)
-
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
-
-        hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'cybertail-rails'
-      end
+      hook = Hook.first
+      expect(hook.project).to eq project
+      expect(hook.message).to eq 'TerribleError: Everything is terrible!'
+      expect(hook.url).to eq 'https://app.honeybadger.io/projects/123/faults/456'
     end
   end
 end

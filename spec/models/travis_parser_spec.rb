@@ -2,51 +2,25 @@ require 'rails_helper'
 
 describe TravisParser do
   describe '.parse' do
-    context 'without an existing project' do
-      it 'creates a new project and add a new hook to it' do
-        Service.create name: 'Travis CI'
+    let(:service) { FactoryGirl.create :travis_service }
+    let(:project) { FactoryGirl.create :project, service: service }
 
-        payload = {
-          repository: {
-            owner_name: 'jonallured',
-            name: 'cybertail-rails'
-          },
-          result_message: 'passed'
-        }
-        TravisParser.parse({ payload: payload.to_json })
+    it 'creates a hook' do
+      payload = {
+        author_name: 'jonallured',
+        build_url: 'https://travis-ci.org/jonallured/cybertail/builds/123',
+        number: '1',
+        result_message: 'passed',
+      }
 
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
+      TravisParser.parse({ payload: payload.to_json }, project)
 
-        hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/cybertail-rails'
-      end
-    end
+      expect(Hook.count).to eq 1
 
-    context 'with an existing project' do
-      it 'creates a hook for that project' do
-        service = Service.create name: 'Travis CI'
-        project = service.projects.create name: 'jonallured/cybertail-rails'
-
-        payload = {
-          repository: {
-            owner_name: 'jonallured',
-            name: 'cybertail-rails'
-          },
-          result_message: 'passed'
-        }
-        TravisParser.parse({ payload: payload.to_json })
-
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
-
-        hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/cybertail-rails'
-      end
+      hook = Hook.first
+      expect(hook.project).to eq project
+      expect(hook.message).to eq 'build #1 by jonallured passed'
+      expect(hook.url).to eq 'https://travis-ci.org/jonallured/cybertail/builds/123'
     end
   end
 end

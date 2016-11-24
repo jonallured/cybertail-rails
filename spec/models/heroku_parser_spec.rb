@@ -2,43 +2,22 @@ require 'rails_helper'
 
 describe HerokuParser do
   describe '.parse' do
-    context 'without an existing project' do
-      it 'creates a new project and add a new hook to it' do
-        Service.create name: 'Heroku'
+    let(:service) { FactoryGirl.create :heroku_service }
+    let(:project) { FactoryGirl.create :project, service: service }
 
-        params = {
-          app: 'cybertail-rails'
-        }
-        HerokuParser.parse(params)
+    it 'creates a hook' do
+      HerokuParser.parse({
+        app: 'cybertail',
+        release: 'v1',
+        user: 'jonallured'
+      }, project)
 
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
+      expect(Hook.count).to eq 1
 
-        hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'cybertail-rails'
-      end
-    end
-
-    context 'with an existing project' do
-      it 'creates a hook for that project' do
-        service = Service.create name: 'Heroku'
-        project = service.projects.create name: 'cybertail-rails'
-
-        params = {
-          app: project.name
-        }
-        HerokuParser.parse(params)
-
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
-
-        hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'cybertail-rails'
-      end
+      hook = Hook.first
+      expect(hook.project).to eq project
+      expect(hook.message).to eq 'v1 deployed by jonallured'
+      expect(hook.url).to eq 'https://dashboard.heroku.com/apps/cybertail'
     end
   end
 end

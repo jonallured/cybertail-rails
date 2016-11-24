@@ -11,8 +11,8 @@ module GithubService
     GenericParser
   ]
 
-  def self.parse(event, params)
-    parsers = PARSERS.map { |klass| klass.new(event, params) }
+  def self.parse(event, params, project)
+    parsers = PARSERS.map { |klass| klass.new(event, params, project) }
     parser = parsers.find &:able_to_parse?
     parser.parse
   end

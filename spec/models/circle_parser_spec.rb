@@ -2,48 +2,88 @@ require 'rails_helper'
 
 describe CircleParser do
   describe '.parse' do
-    context 'without an existing project' do
-      it 'creates a new project and add a new hook to it' do
-        Service.create name: 'Circle CI'
+    let(:service) { FactoryGirl.create :circle_service }
+    let(:project) { FactoryGirl.create :project, service: service }
 
-        params = {
-          payload: {
-            username: 'jonallured',
-            reponame: 'cybertail-rails'
-          }
-        }
-        CircleParser.parse(params)
+    it 'creates a hook' do
+      payload = {
+        build_num: '1',
+        build_url: 'https://circleci.com/gh/jonallured/test/20',
+        committer_name: 'jonallured',
+        outcome: 'success'
+      }
 
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
+      CircleParser.parse({ payload: payload }, project)
+
+      expect(Hook.count).to eq 1
+
+      hook = Hook.first
+      expect(hook.project).to eq project
+      expect(hook.message).to eq 'build #1 by jonallured passed'
+      expect(hook.url).to eq 'https://circleci.com/gh/jonallured/test/20'
+    end
+
+    let(:payload) do
+      {
+        build_num: '1',
+        build_url: 'https://circleci.com/gh/jonallured/test/20',
+        committer_name: 'jonallured',
+        outcome: outcome
+      }
+    end
+
+    context 'with a canceled result' do
+      let(:outcome) { 'canceled' }
+
+      it 'creates a hook with a canceled result' do
+        CircleParser.parse({ payload: payload }, project)
 
         hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/cybertail-rails'
+        expect(hook.message.split.last).to eq 'canceled'
       end
     end
 
-    context 'with an existing project' do
-      it 'creates a hook for that project' do
-        service = Service.create name: 'Circle CI'
-        project = service.projects.create name: 'jonallured/cybertail-rails'
+    context 'with an infrastructure_fail result' do
+      let(:outcome) { 'infrastructure_fail' }
 
-        params = {
-          payload: {
-            username: 'jonallured',
-            reponame: 'cybertail-rails'
-          }
-        }
-        CircleParser.parse(params)
-
-        expect(Hook.count).to eq 1
-        expect(Project.count).to eq 1
+      it 'creates a hook with a failed result' do
+        CircleParser.parse({ payload: payload }, project)
 
         hook = Hook.first
-        project = Project.first
-        expect(hook.project).to eq project
-        expect(project.name).to eq 'jonallured/cybertail-rails'
+        expect(hook.message.split.last).to eq 'failed'
+      end
+    end
+
+    context 'with a timedout result' do
+      let(:outcome) { 'timedout' }
+
+      it 'creates a hook with a failed result' do
+        CircleParser.parse({ payload: payload }, project)
+
+        hook = Hook.first
+        expect(hook.message.split.last).to eq 'failed'
+      end
+    end
+
+    context 'with a failed result' do
+      let(:outcome) { 'failed' }
+
+      it 'creates a hook with a failed result' do
+        CircleParser.parse({ payload: payload }, project)
+
+        hook = Hook.first
+        expect(hook.message.split.last).to eq 'failed'
+      end
+    end
+
+    context 'with a no_tests result' do
+      let(:outcome) { 'no_tests' }
+
+      it 'creates a hook with a failed result' do
+        CircleParser.parse({ payload: payload }, project)
+
+        hook = Hook.first
+        expect(hook.message.split.last).to eq 'failed'
       end
     end
   end

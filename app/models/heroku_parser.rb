@@ -1,10 +1,11 @@
 class HerokuParser
-  def self.parse(params)
-    new(params).parse
+  def self.parse(params, project)
+    new(params, project).parse
   end
 
-  def initialize(params)
+  def initialize(params, project)
     @params = params
+    @project = project
   end
 
   def parse
@@ -16,23 +17,11 @@ class HerokuParser
   def hook_params
     {
       payload: @params,
-      project: project,
+      project: @project,
       message: message,
       url: url,
       sent_at: Time.now
     }
-  end
-
-  def service
-    Service.heroku
-  end
-
-  def project_name
-    @params[:app]
-  end
-
-  def project
-    @project ||= service.projects.find_or_create_by name: project_name
   end
 
   def message

@@ -15,7 +15,7 @@ class HooksController < ApplicationController
   end
 
   def args
-    [github_event, params].compact
+    [github_event, params, project].compact
   end
 
   def github_event

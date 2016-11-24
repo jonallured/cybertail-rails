@@ -1,11 +1,12 @@
 class TravisParser
-  def self.parse(params)
-    new(params).parse
+  def self.parse(params, project)
+    new(params, project).parse
   end
 
-  def initialize(params)
+  def initialize(params, project)
     parsed = JSON.parse params[:payload]
     @params = ActiveSupport::HashWithIndifferentAccess.new parsed
+    @project = project
   end
 
   def parse
@@ -17,27 +18,11 @@ class TravisParser
   def hook_params
     {
       payload: @params,
-      project: project,
+      project: @project,
       message: message,
       url: @params[:build_url],
       sent_at: Time.now
     }
-  end
-
-  def service
-    Service.travis
-  end
-
-  def repository
-    @params[:repository]
-  end
-
-  def project_name
-    [repository[:owner_name], repository[:name]].join('/')
-  end
-
-  def project
-    @project ||= service.projects.find_or_create_by name: project_name
   end
 
   def message
