@@ -16,4 +16,4 @@ notifications:
   email: false
   webhooks:
     urls:
-      - https://uplink-app.herokuapp.com/travis_hooks
+      secure: z3cGb+B/RFOOtRChx//ZK32q0OmPwLM4dLowG5p0YrRXwzQixw5a3LU/8D6jlM18XeHXsdRNvBRuHRwYbr9SnH5CJrA3N62PMOZcqzJ2+7kZOp8dlS6sc25rPhiFPz+h6i+9Q6Oq16w3Jw/4k/GXVsEaOicJdE4T5XTXg0V4tuWFq/yaz/ektrXY2q1uYQrJSnTbcC6JG4jRZ6lPO86GGBEi8woE/D+tNbIbVMQzRrYX2jSaIifs4PhxDjsFui6dHGGP4Q2SiCws92vK++RDzXhyayP1il97T43euoWgbWbk90jaSFiIdA6r5ffwzSdImE7TUG/dRf+roOSnJ/hdhTE7Ip+TvAX+w2KtArWoe5fKcL5O496PC4+sMoXlXyjDSPNeRGK1hTtsIeZ0Qorxk1E/WuTj/Z+6WZnYPct4MB6BzwdYzOSHalwwGkRq92x0kzIYuBdIa5mzCMR8z9UYMAZB6mv4ok5A6cwAfVwiWRNoD356wE/TUXsknPkBSDUf1h+tBGgHPbfn+fFcjy7FCuR+IJFgtVAf7D0AHGly/mYZ7Oq+dNYwCreW2ByrvDm8eFG2hSaeSPlQuS36tsmpPTAxbtK39Shpi/xTvTmc7rsKaduWgxylTizhEyIVVHtRKMswum0cOq9U+kbkk+IDWracoppVjZGiiZ1josqmS7s=
