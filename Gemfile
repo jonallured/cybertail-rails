@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.3.1'
+
+ruby '2.4.1'
 #ruby-gemset=cybertail-rails
 
 gem 'rails', '5.0.0.1'
