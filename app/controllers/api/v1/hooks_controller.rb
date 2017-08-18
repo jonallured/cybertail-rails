@@ -1,6 +1,6 @@
 class Api::V1::HooksController < ApplicationController
   before_action :ensure_user
-  expose(:hooks) { current_user.hooks }
+  expose(:hooks) { Hook.most_recent_for(current_user.id) }
 
   private
 

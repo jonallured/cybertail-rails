@@ -6,10 +6,6 @@ class User < ApplicationRecord
   before_validation :set_token
   validates_presence_of :token
 
-  def hooks
-    subscriptions.map(&:hooks).flatten
-  end
-
   private
 
   def set_token
