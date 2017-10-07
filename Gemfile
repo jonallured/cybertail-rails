@@ -24,8 +24,6 @@ end
 group :development do
   gem 'listen'
   gem 'rails-erd'
-  gem 'spring'
-  gem 'spring-watcher-listen'
   gem 'web-console'
 end
 
