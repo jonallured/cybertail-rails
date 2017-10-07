@@ -5,7 +5,7 @@ class Api::V1::HooksController < ApplicationController
   private
 
   def current_user
-    @current_user ||= User.find_by token: params[:token]
+    @current_user ||= User.find_by(token: request.headers['X-USER-TOKEN'])
   end
 
   def ensure_user
