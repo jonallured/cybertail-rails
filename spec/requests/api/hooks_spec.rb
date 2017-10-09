@@ -39,25 +39,70 @@ describe 'GET /v1/hooks', subdomain: 'api' do
     end
 
     context 'with a subscription' do
-      it 'returns the hooks for that user' do
-        hook = FactoryGirl.create :hook
-        user = FactoryGirl.create :user
-        FactoryGirl.create :subscription, user: user, project: hook.project
+      it 'returns the hooks up to and including the bookmarked hook' do
+        project = FactoryGirl.create :project
+
+        older_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.ago
+        hook = FactoryGirl.create :hook, project: project
+        newer_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.from_now
+
+        user = FactoryGirl.create :user, bookmarked_at: hook.created_at
+        FactoryGirl.create :subscription, user: user, project: project
 
         get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => user.token }
 
         expect(response.code).to eq '200'
 
-        response_json = JSON.parse response.body
-        expect(response_json).to eq([
+        hooks = JSON.parse response.body
+
+        expect(hooks.size).to eq 2
+        expect(hooks).to eq([
           {
+            'id' => hook.id,
             'service_id' => hook.project.service.id,
             'project_name' => hook.project.name,
             'message' => hook.message,
             'url' => hook.url,
             'sent_at' => hook.sent_at.as_json
+          },
+          {
+            'id' => older_hook.id,
+            'service_id' => older_hook.project.service.id,
+            'project_name' => older_hook.project.name,
+            'message' => older_hook.message,
+            'url' => older_hook.url,
+            'sent_at' => older_hook.sent_at.as_json
           }
         ])
+      end
+
+      context 'with a newest_hook_id' do
+        it 'returns only hooks newer than that id' do
+          project = FactoryGirl.create :project
+
+          older_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.ago
+          hook = FactoryGirl.create :hook, project: project
+          newer_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.from_now
+
+          user = FactoryGirl.create :user, bookmarked_at: hook.created_at
+          FactoryGirl.create :subscription, user: user, project: project
+
+          get '/v1/hooks.json', params: { newest_hook_id: hook.id }, headers: { 'X-USER-TOKEN' => user.token }
+
+          hooks = JSON.parse response.body
+
+          expect(hooks.size).to eq 1
+          expect(hooks).to eq([
+            {
+              'id' => newer_hook.id,
+              'service_id' => newer_hook.project.service.id,
+              'project_name' => newer_hook.project.name,
+              'message' => newer_hook.message,
+              'url' => newer_hook.url,
+              'sent_at' => newer_hook.sent_at.as_json
+            }
+          ])
+        end
       end
     end
   end

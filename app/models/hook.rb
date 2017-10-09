@@ -10,6 +10,16 @@ class Hook < ApplicationRecord
       limit(limit)
   end
 
+  def self.newer_than_hook_for(user, newest_hook_id, limit=100)
+    most_recent_for(user.id, limit).
+      where("hooks.id > ?", newest_hook_id)
+  end
+
+  def self.up_to_bookmark_for(user, limit=100)
+    most_recent_for(user.id, limit).
+      where("hooks.created_at >= ?", user.bookmarked_at)
+  end
+
   def service_id
     project.service.id
   end

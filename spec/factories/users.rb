@@ -5,5 +5,6 @@ FactoryGirl.define do
     end
 
     password "password"
+    bookmarked_at Time.now
   end
 end
