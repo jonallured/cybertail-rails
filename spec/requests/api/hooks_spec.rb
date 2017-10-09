@@ -16,7 +16,7 @@ describe 'GET /v1/hooks', subdomain: 'api' do
     it 'returns an empty 404 response' do
       hook = FactoryGirl.create :hook
 
-      get '/v1/hooks.json', params: { token: 'invalid' }
+      get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => 'invalid' }
 
       expect(response.code).to eq '404'
       expect(response.body).to eq ''
@@ -29,7 +29,7 @@ describe 'GET /v1/hooks', subdomain: 'api' do
         FactoryGirl.create :hook
         user = FactoryGirl.create :user
 
-        get '/v1/hooks.json', params: { token: user.token }
+        get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => user.token }
 
         expect(response.code).to eq '200'
 
@@ -44,7 +44,7 @@ describe 'GET /v1/hooks', subdomain: 'api' do
         user = FactoryGirl.create :user
         FactoryGirl.create :subscription, user: user, project: hook.project
 
-        get '/v1/hooks.json', params: { token: user.token }
+        get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => user.token }
 
         expect(response.code).to eq '200'
 
