@@ -17,7 +17,7 @@ class Hook < ApplicationRecord
 
   def self.up_to_bookmark_for(user, limit=100)
     most_recent_for(user.id, limit).
-      where("hooks.created_at >= ?", user.bookmarked_at)
+      where("hooks.created_at <= ?", user.bookmarked_at)
   end
 
   def service_id
