@@ -6,7 +6,7 @@ describe 'GET /v1/users', subdomain: 'api' do
       user = FactoryGirl.create :user
       hook = FactoryGirl.create :hook
 
-      params = { last_read_hook_id: hook.id }
+      params = { latest_hook_id: hook.id }
       patch '/v1/users', params: params, as: :json
 
       expect(response.code).to eq '404'
@@ -19,7 +19,7 @@ describe 'GET /v1/users', subdomain: 'api' do
       user = FactoryGirl.create :user
       hook = FactoryGirl.create :hook
 
-      params = { last_read_hook_id: hook.id }
+      params = { latest_hook_id: hook.id }
       patch '/v1/users', params: params, headers: { 'X-USER-TOKEN' => 'invalid' }, as: :json
 
       expect(response.code).to eq '404'
@@ -34,7 +34,7 @@ describe 'GET /v1/users', subdomain: 'api' do
 
       user = FactoryGirl.create :user, bookmarked_at: old_hook.created_at
 
-      params = { last_read_hook_id: new_hook.id }
+      params = { latest_hook_id: new_hook.id }
       patch '/v1/users', params: params, headers: { 'X-USER-TOKEN' => user.token }, as: :json
 
       expect(response.code).to eq '204'

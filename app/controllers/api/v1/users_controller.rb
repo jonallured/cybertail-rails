@@ -6,6 +6,6 @@ class Api::V1::UsersController < ApiController
   private
 
   def hook
-    Hook.find params[:last_read_hook_id]
+    Hook.find params[:latest_hook_id]
   end
 end
