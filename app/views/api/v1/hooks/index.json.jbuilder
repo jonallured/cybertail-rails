@@ -1,1 +1,1 @@
-json.array! hooks, :service_id, :project_name, :message, :url, :sent_at
+json.array! hooks, :id, :service_id, :project_name, :message, :url, :sent_at
