@@ -1,6 +1,4 @@
 class HooksController < ApplicationController
-  protect_from_forgery with: :null_session
-
   expose :project, find_by: :token, id: :project_token
 
   def create
