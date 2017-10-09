@@ -28,9 +28,9 @@ describe 'GET /v1/users', subdomain: 'api' do
   end
 
   context 'with a valid token' do
-    it 'something' do
+    it 'updates the user' do
       old_hook = FactoryGirl.create :hook, created_at: 1.day.ago
-      new_hook = FactoryGirl.create :hook
+      new_hook = FactoryGirl.create :hook, created_at: 1.hour.ago
 
       user = FactoryGirl.create :user, bookmarked_at: old_hook.created_at
 
@@ -40,7 +40,7 @@ describe 'GET /v1/users', subdomain: 'api' do
       expect(response.code).to eq '204'
       expect(response.body).to eq ''
 
-      expect(user.reload.bookmarked_at).to eq new_hook.created_at
+      expect(User.first.bookmarked_at.to_i).to eq new_hook.created_at.to_i
     end
   end
 end
