@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
       get '/hooks/', to: 'hooks#index'
       get '/authenticate', to: 'authenticate#show'
+      patch :users, to: 'users#update'
     end
   end
 
