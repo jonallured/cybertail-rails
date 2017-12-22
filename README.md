@@ -20,7 +20,7 @@ Once setup, you can run the tests like this:
 $ bundle exec rake spec
 ```
 
-Note: the default rake task is setup to run tests and Rubocop.
+Note: the default rake task is setup to run tests and RuboCop.
 
 [status]: https://travis-ci.org/jonallured/cybertail-rails.svg?branch=master
 [icon]: https://travis-ci.org/jonallured/cybertail-rails
