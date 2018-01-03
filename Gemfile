@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.5.0'
 #ruby-gemset=cybertail-rails
 
-gem 'rails', '5.1.3'
+gem 'rails', '5.1.4'
 gem 'pg'
 gem 'puma'
 

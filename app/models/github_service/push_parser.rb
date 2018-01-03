@@ -11,7 +11,8 @@ module GithubService
     end
 
     def commit_count
-      @params.fetch(:commits, []).count
+      commits = @params.fetch(:commits, [])
+      commits.map(&:presence).compact.count
     end
 
     def ref
