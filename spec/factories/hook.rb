@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :hook do
     payload '{ "key": "value"}'
     message 'This hook happened.'

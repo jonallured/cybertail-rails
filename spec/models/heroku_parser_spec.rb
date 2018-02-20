@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe HerokuParser do
   describe '.parse' do
-    let(:service) { FactoryGirl.create :heroku_service }
-    let(:project) { FactoryGirl.create :project, service: service }
+    let(:service) { FactoryBot.create :heroku_service }
+    let(:project) { FactoryBot.create :project, service: service }
 
     it 'creates a hook' do
       HerokuParser.parse({

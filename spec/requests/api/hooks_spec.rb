@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'GET /v1/hooks', subdomain: 'api' do
   context 'without a token' do
     it 'returns an empty 404 response' do
-      hook = FactoryGirl.create :hook
+      hook = FactoryBot.create :hook
 
       get '/v1/hooks.json'
 
@@ -14,7 +14,7 @@ describe 'GET /v1/hooks', subdomain: 'api' do
 
   context 'with an invalid token' do
     it 'returns an empty 404 response' do
-      hook = FactoryGirl.create :hook
+      hook = FactoryBot.create :hook
 
       get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => 'invalid' }
 
@@ -26,8 +26,8 @@ describe 'GET /v1/hooks', subdomain: 'api' do
   context 'with a valid token' do
     context 'with no subscriptions' do
       it 'returns an empty list of hooks' do
-        FactoryGirl.create :hook
-        user = FactoryGirl.create :user
+        FactoryBot.create :hook
+        user = FactoryBot.create :user
 
         get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => user.token }
 
@@ -40,14 +40,14 @@ describe 'GET /v1/hooks', subdomain: 'api' do
 
     context 'with a subscription' do
       it 'returns the hooks up to and including the bookmarked hook' do
-        project = FactoryGirl.create :project
+        project = FactoryBot.create :project
 
-        older_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.ago
-        hook = FactoryGirl.create :hook, project: project
-        newer_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.from_now
+        older_hook = FactoryBot.create :hook, project: project, created_at: 1.day.ago
+        hook = FactoryBot.create :hook, project: project
+        newer_hook = FactoryBot.create :hook, project: project, created_at: 1.day.from_now
 
-        user = FactoryGirl.create :user, bookmarked_at: hook.created_at
-        FactoryGirl.create :subscription, user: user, project: project
+        user = FactoryBot.create :user, bookmarked_at: hook.created_at
+        FactoryBot.create :subscription, user: user, project: project
 
         get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => user.token }
 
@@ -78,14 +78,14 @@ describe 'GET /v1/hooks', subdomain: 'api' do
 
       context 'with a newest_hook_id' do
         it 'returns only hooks newer than that id' do
-          project = FactoryGirl.create :project
+          project = FactoryBot.create :project
 
-          older_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.ago
-          hook = FactoryGirl.create :hook, project: project
-          newer_hook = FactoryGirl.create :hook, project: project, created_at: 1.day.from_now
+          older_hook = FactoryBot.create :hook, project: project, created_at: 1.day.ago
+          hook = FactoryBot.create :hook, project: project
+          newer_hook = FactoryBot.create :hook, project: project, created_at: 1.day.from_now
 
-          user = FactoryGirl.create :user, bookmarked_at: hook.created_at
-          FactoryGirl.create :subscription, user: user, project: project
+          user = FactoryBot.create :user, bookmarked_at: hook.created_at
+          FactoryBot.create :subscription, user: user, project: project
 
           get '/v1/hooks.json', params: { newest_hook_id: hook.id }, headers: { 'X-USER-TOKEN' => user.token }
 

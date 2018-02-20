@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'GET /v1/users', subdomain: 'api' do
   context 'without a token' do
     it 'returns an empty 404 response' do
-      user = FactoryGirl.create :user
-      hook = FactoryGirl.create :hook
+      user = FactoryBot.create :user
+      hook = FactoryBot.create :hook
 
       params = { latest_hook_id: hook.id }
       patch '/v1/users', params: params, as: :json
@@ -16,8 +16,8 @@ describe 'GET /v1/users', subdomain: 'api' do
 
   context 'with an invalid token' do
     it 'returns an empty 404 response' do
-      user = FactoryGirl.create :user
-      hook = FactoryGirl.create :hook
+      user = FactoryBot.create :user
+      hook = FactoryBot.create :hook
 
       params = { latest_hook_id: hook.id }
       patch '/v1/users', params: params, headers: { 'X-USER-TOKEN' => 'invalid' }, as: :json
@@ -29,10 +29,10 @@ describe 'GET /v1/users', subdomain: 'api' do
 
   context 'with a valid token' do
     it 'updates the user' do
-      old_hook = FactoryGirl.create :hook, created_at: 1.day.ago
-      new_hook = FactoryGirl.create :hook, created_at: 1.hour.ago
+      old_hook = FactoryBot.create :hook, created_at: 1.day.ago
+      new_hook = FactoryBot.create :hook, created_at: 1.hour.ago
 
-      user = FactoryGirl.create :user, bookmarked_at: old_hook.created_at
+      user = FactoryBot.create :user, bookmarked_at: old_hook.created_at
 
       params = { latest_hook_id: new_hook.id }
       patch '/v1/users', params: params, headers: { 'X-USER-TOKEN' => user.token }, as: :json

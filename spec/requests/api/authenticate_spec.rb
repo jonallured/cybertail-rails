@@ -14,7 +14,7 @@ describe 'GET /v1/authenticate', subdomain: 'api' do
 
   context 'with valid credentials' do
     it 'returns the token for that user' do
-      user = FactoryGirl.create :user
+      user = FactoryBot.create :user
       params = { email: user.email, password: user.password }
 
       get '/v1/authenticate.json', params: params

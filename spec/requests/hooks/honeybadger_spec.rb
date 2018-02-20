@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Honeybadger hooks', subdomain: 'hooks' do
   it 'something' do
-    service = FactoryGirl.create :honeybadger_service
+    service = FactoryBot.create :honeybadger_service
     project = service.projects.create name: 'Cybertail'
 
     params = {

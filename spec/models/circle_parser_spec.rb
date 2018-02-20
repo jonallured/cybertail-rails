@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe CircleParser do
   describe '.parse' do
-    let(:service) { FactoryGirl.create :circle_service }
-    let(:project) { FactoryGirl.create :project, service: service }
+    let(:service) { FactoryBot.create :circle_service }
+    let(:project) { FactoryBot.create :project, service: service }
 
     it 'creates a hook' do
       payload = {

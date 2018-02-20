@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Travis hooks', subdomain: 'hooks' do
   it 'something' do
-    service = FactoryGirl.create :travis_service
+    service = FactoryBot.create :travis_service
     project = service.projects.create name: 'jonallured/cybertail-rails'
 
     payload = {

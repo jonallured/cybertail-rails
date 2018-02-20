@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe HoneybadgerParser do
   describe '.parse' do
-    let(:service) { FactoryGirl.create :honeybadger_service }
-    let(:project) { FactoryGirl.create :project, service: service }
+    let(:service) { FactoryBot.create :honeybadger_service }
+    let(:project) { FactoryBot.create :project, service: service }
 
     it 'creates a hook' do
       params = {

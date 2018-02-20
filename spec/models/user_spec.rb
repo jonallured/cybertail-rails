@@ -6,12 +6,12 @@ describe User do
       existing_token = "abc123"
       new_token = "def456"
 
-      existing_user = FactoryGirl.create :user
+      existing_user = FactoryBot.create :user
       existing_user.update_attribute :token, existing_token.upcase
 
       allow(SecureRandom).to receive(:hex).and_return(existing_token, new_token)
 
-      user = FactoryGirl.create :user
+      user = FactoryBot.create :user
       expect(user.token).to eq new_token.upcase
     end
   end
