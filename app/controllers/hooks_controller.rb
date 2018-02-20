@@ -2,7 +2,7 @@ class HooksController < ApplicationController
   expose :project, find_by: :token, id: :project_token
 
   def create
-    parser.parse *args
+    parser.parse(*args)
     head :created
   end
 

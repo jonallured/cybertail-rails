@@ -19,7 +19,7 @@ module GithubService
     end
 
     def message
-      %Q|#{username} created #{type} "#{name}"|
+      %(#{username} created #{type} "#{name}")
     end
 
     def html_url

@@ -20,7 +20,7 @@ class HerokuParser
       project: @project,
       message: message,
       url: url,
-      sent_at: Time.now
+      sent_at: Time.current
     }
   end
 

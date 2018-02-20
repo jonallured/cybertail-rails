@@ -19,7 +19,7 @@ module GithubService
     end
 
     def message
-      %Q|#{username} commented on ##{number}: "#{title}"|
+      %(#{username} commented on ##{number}: "#{title}")
     end
 
     def url

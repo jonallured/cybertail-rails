@@ -19,7 +19,7 @@ module GithubService
     end
 
     def message
-      %Q|#{username} deleted #{type} "#{name}"|
+      %(#{username} deleted #{type} "#{name}")
     end
 
     def url

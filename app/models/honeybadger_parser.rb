@@ -20,7 +20,7 @@ class HoneybadgerParser
       project: @project,
       message: message,
       url: fault[:url],
-      sent_at: Time.now
+      sent_at: Time.current
     }
   end
 

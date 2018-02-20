@@ -6,6 +6,6 @@ services = [
   { id: 5, name: 'Circle CI', parser: 'CircleParser' }
 ]
 
-for attrs in services
+services.each do |attrs|
   Service.create(attrs) unless Service.exists?(attrs)
 end

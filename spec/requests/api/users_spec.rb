@@ -3,7 +3,6 @@ require 'rails_helper'
 describe 'GET /v1/users', subdomain: 'api' do
   context 'without a token' do
     it 'returns an empty 404 response' do
-      user = FactoryBot.create :user
       hook = FactoryBot.create :hook
 
       params = { latest_hook_id: hook.id }
@@ -16,11 +15,11 @@ describe 'GET /v1/users', subdomain: 'api' do
 
   context 'with an invalid token' do
     it 'returns an empty 404 response' do
-      user = FactoryBot.create :user
       hook = FactoryBot.create :hook
 
       params = { latest_hook_id: hook.id }
-      patch '/v1/users', params: params, headers: { 'X-USER-TOKEN' => 'invalid' }, as: :json
+      headers = { 'X-USER-TOKEN' => 'invalid' }
+      patch '/v1/users', params: params, headers: headers, as: :json
 
       expect(response.code).to eq '404'
       expect(response.body).to eq ''
@@ -35,7 +34,8 @@ describe 'GET /v1/users', subdomain: 'api' do
       user = FactoryBot.create :user, bookmarked_at: old_hook.created_at
 
       params = { latest_hook_id: new_hook.id }
-      patch '/v1/users', params: params, headers: { 'X-USER-TOKEN' => user.token }, as: :json
+      headers = { 'X-USER-TOKEN' => user.token }
+      patch '/v1/users', params: params, headers: headers, as: :json
 
       expect(response.code).to eq '204'
       expect(response.body).to eq ''

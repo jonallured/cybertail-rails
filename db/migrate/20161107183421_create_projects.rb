@@ -14,6 +14,7 @@ class Hook < ApplicationRecord
 end
 
 class CreateProjects < ActiveRecord::Migration[5.0]
+  # rubocop:disable Metrics/AbcSize
   def up
     rename_column :hooks, :project, :project_name
 
@@ -25,8 +26,8 @@ class CreateProjects < ActiveRecord::Migration[5.0]
 
     add_column :hooks, :project_id, :integer
 
-    for service in Service.all
-      for hook in service.hooks
+    Service.all.each do |service|
+      service.hooks.each do |hook|
         project = service.projects.find_or_create_by name: hook.project_name
         hook.update_attributes project: project
       end
@@ -35,14 +36,20 @@ class CreateProjects < ActiveRecord::Migration[5.0]
     remove_column :hooks, :service_id
     remove_column :hooks, :project_name
   end
+  # rubocop:enable Metrics/AbcSize
 
   def down
     add_column :hooks, :project_name, :string
     add_column :hooks, :service_id, :integer
 
-    for project in Project.all
-      for hook in project.hooks
-        hook.update_attributes service: project.service, project_name: project.name
+    Project.all.each do |project|
+      project.hooks.each do |hook|
+        attrs = {
+          service: project.service,
+          project_name: project.name
+        }
+
+        hook.update_attributes attrs
       end
     end
 

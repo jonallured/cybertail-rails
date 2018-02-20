@@ -10,7 +10,7 @@ describe TravisParser do
         author_name: 'jonallured',
         build_url: 'https://travis-ci.org/jonallured/cybertail/builds/123',
         number: '1',
-        result_message: 'passed',
+        result_message: 'passed'
       }
 
       TravisParser.parse({ payload: payload.to_json }, project)

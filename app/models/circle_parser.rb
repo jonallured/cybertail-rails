@@ -20,7 +20,7 @@ class CircleParser
       project: @project,
       message: message,
       url: @params[:build_url],
-      sent_at: Time.now
+      sent_at: Time.current
     }
   end
 

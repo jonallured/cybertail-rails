@@ -21,11 +21,15 @@ class TravisParser
       project: @project,
       message: message,
       url: @params[:build_url],
-      sent_at: Time.now
+      sent_at: Time.current
     }
   end
 
   def message
-    "build ##{@params[:number]} by #{@params[:author_name]} #{@params[:result_message].downcase}"
+    build_number = @params[:number]
+    author_name = @params[:author_name]
+    result_message = @params[:result_message].downcase
+
+    "build ##{build_number} by #{author_name} #{result_message}"
   end
 end

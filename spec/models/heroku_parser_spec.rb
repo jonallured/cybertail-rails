@@ -6,11 +6,13 @@ describe HerokuParser do
     let(:project) { FactoryBot.create :project, service: service }
 
     it 'creates a hook' do
-      HerokuParser.parse({
+      params = {
         app: 'cybertail',
         release: 'v1',
         user: 'jonallured'
-      }, project)
+      }
+
+      HerokuParser.parse(params, project)
 
       expect(Hook.count).to eq 1
 

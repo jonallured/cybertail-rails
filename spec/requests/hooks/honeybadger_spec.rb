@@ -12,7 +12,7 @@ describe 'Honeybadger hooks', subdomain: 'hooks' do
       fault: {
         klass: 'RuntimeError',
         message: 'Something went horribly wrong',
-        url: "https://app.honeybadger.io/projects/123/faults/456"
+        url: 'https://app.honeybadger.io/projects/123/faults/456'
       }
     }
 
@@ -22,7 +22,7 @@ describe 'Honeybadger hooks', subdomain: 'hooks' do
 
     hook = Hook.first
     expect(hook.service_id).to eq service.id
-    expect(hook.message).to eq "RuntimeError: Something went horribly wrong"
-    expect(hook.url).to eq "https://app.honeybadger.io/projects/123/faults/456"
+    expect(hook.message).to eq 'RuntimeError: Something went horribly wrong'
+    expect(hook.url).to eq 'https://app.honeybadger.io/projects/123/faults/456'
   end
 end

@@ -27,8 +27,8 @@ describe 'Circle CI Hooks', subdomain: 'hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq service.id
-      expect(hook.message).to eq "build #1 by Jon Allured canceled"
-      expect(hook.url).to eq "https://circleci.com/"
+      expect(hook.message).to eq 'build #1 by Jon Allured canceled'
+      expect(hook.url).to eq 'https://circleci.com/'
     end
   end
 
@@ -41,8 +41,8 @@ describe 'Circle CI Hooks', subdomain: 'hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq service.id
-      expect(hook.message).to eq "build #1 by Jon Allured failed"
-      expect(hook.url).to eq "https://circleci.com/"
+      expect(hook.message).to eq 'build #1 by Jon Allured failed'
+      expect(hook.url).to eq 'https://circleci.com/'
     end
   end
 
@@ -55,8 +55,8 @@ describe 'Circle CI Hooks', subdomain: 'hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq service.id
-      expect(hook.message).to eq "build #1 by Jon Allured failed"
-      expect(hook.url).to eq "https://circleci.com/"
+      expect(hook.message).to eq 'build #1 by Jon Allured failed'
+      expect(hook.url).to eq 'https://circleci.com/'
     end
   end
 
@@ -69,8 +69,8 @@ describe 'Circle CI Hooks', subdomain: 'hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq service.id
-      expect(hook.message).to eq "build #1 by Jon Allured failed"
-      expect(hook.url).to eq "https://circleci.com/"
+      expect(hook.message).to eq 'build #1 by Jon Allured failed'
+      expect(hook.url).to eq 'https://circleci.com/'
     end
   end
 
@@ -83,8 +83,8 @@ describe 'Circle CI Hooks', subdomain: 'hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq service.id
-      expect(hook.message).to eq "build #1 by Jon Allured failed"
-      expect(hook.url).to eq "https://circleci.com/"
+      expect(hook.message).to eq 'build #1 by Jon Allured failed'
+      expect(hook.url).to eq 'https://circleci.com/'
     end
   end
 
@@ -97,8 +97,8 @@ describe 'Circle CI Hooks', subdomain: 'hooks' do
 
       hook = Hook.first
       expect(hook.service_id).to eq service.id
-      expect(hook.message).to eq "build #1 by Jon Allured passed"
-      expect(hook.url).to eq "https://circleci.com/"
+      expect(hook.message).to eq 'build #1 by Jon Allured passed'
+      expect(hook.url).to eq 'https://circleci.com/'
     end
   end
 end

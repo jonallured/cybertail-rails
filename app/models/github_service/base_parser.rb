@@ -21,7 +21,7 @@ module GithubService
         message: message,
         payload: @params.to_unsafe_hash,
         project: @project,
-        sent_at: Time.now,
+        sent_at: Time.current,
         suppress: suppress,
         url: url
       }

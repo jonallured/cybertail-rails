@@ -23,7 +23,7 @@ describe 'GitHub hooks', subdomain: 'hooks' do
       expect(hook).to_not be_suppress
       expect(hook.service_id).to eq service.id
       expect(hook.message).to eq "Got event unknown, saved as Hook #{hook.id}."
-      expect(hook.url).to eq "https://github.com"
+      expect(hook.url).to eq 'https://github.com'
     end
   end
 
@@ -112,7 +112,7 @@ describe 'GitHub hooks', subdomain: 'hooks' do
 
         params = {
           commits: [],
-          compare: "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2",
+          compare: 'https://github.com/jonallured/cybertail-rails/compare/sha1...sha2',
           pusher: { name: 'jonallured' },
           ref: 'refs/heads/master',
           repository: { full_name: 'jonallured/cybertail-rails' }
@@ -127,8 +127,8 @@ describe 'GitHub hooks', subdomain: 'hooks' do
         hook = Hook.first
         expect(hook).to be_suppress
         expect(hook.service_id).to eq service.id
-        expect(hook.message).to eq "jonallured pushed 0 commits to master"
-        expect(hook.url).to eq "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2"
+        expect(hook.message).to eq 'jonallured pushed 0 commits to master'
+        expect(hook.url).to eq 'https://github.com/jonallured/cybertail-rails/compare/sha1...sha2'
       end
     end
 
@@ -137,8 +137,8 @@ describe 'GitHub hooks', subdomain: 'hooks' do
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
-          commits: [ 'a', 'b' ],
-          compare: "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2",
+          commits: %w[a b],
+          compare: 'https://github.com/jonallured/cybertail-rails/compare/sha1...sha2',
           pusher: { name: 'jonallured' },
           ref: 'refs/heads/master',
           repository: { full_name: 'jonallured/cybertail-rails' }
@@ -152,8 +152,8 @@ describe 'GitHub hooks', subdomain: 'hooks' do
 
         hook = Hook.first
         expect(hook.service_id).to eq service.id
-        expect(hook.message).to eq "jonallured pushed 2 commits to master"
-        expect(hook.url).to eq "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2"
+        expect(hook.message).to eq 'jonallured pushed 2 commits to master'
+        expect(hook.url).to eq 'https://github.com/jonallured/cybertail-rails/compare/sha1...sha2'
       end
     end
   end
@@ -210,8 +210,8 @@ describe 'GitHub hooks', subdomain: 'hooks' do
         project = service.projects.create name: 'jonallured/cybertail-rails'
 
         params = {
-          commits: [ 'a', 'b' ],
-          compare: "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2",
+          commits: %w[a b],
+          compare: 'https://github.com/jonallured/cybertail-rails/compare/sha1...sha2',
           pusher: { name: 'jonallured' },
           ref: 'refs/heads/master',
           repository: { full_name: 'jonallured/cybertail-rails' }
@@ -225,8 +225,8 @@ describe 'GitHub hooks', subdomain: 'hooks' do
 
         hook = Hook.first
         expect(hook.service_id).to eq service.id
-        expect(hook.message).to eq "jonallured pushed 2 commits to master"
-        expect(hook.url).to eq "https://github.com/jonallured/cybertail-rails/compare/sha1...sha2"
+        expect(hook.message).to eq 'jonallured pushed 2 commits to master'
+        expect(hook.url).to eq 'https://github.com/jonallured/cybertail-rails/compare/sha1...sha2'
       end
     end
   end
@@ -280,7 +280,8 @@ describe 'GitHub hooks', subdomain: 'hooks' do
 
           hook = Hook.first
           expect(hook.service_id).to eq service.id
-          expect(hook.message).to eq 'jonallured opened #1: "Something is broken"'
+          expected_message = 'jonallured opened #1: "Something is broken"'
+          expect(hook.message).to eq expected_message
           expect(hook.url).to eq 'https://github.com/jonallured/cybertail-ios/issues/1'
         end
       end
@@ -297,7 +298,7 @@ describe 'GitHub hooks', subdomain: 'hooks' do
             },
             issue: {
               number: '1',
-              title: 'Something is broken',
+              title: 'Something is broken'
             },
             sender: { login: 'jonallured' },
             repository: { full_name: 'jonallured/cybertail-rails' }
@@ -311,7 +312,8 @@ describe 'GitHub hooks', subdomain: 'hooks' do
 
           hook = Hook.first
           expect(hook.service_id).to eq service.id
-          expect(hook.message).to eq 'jonallured commented on #1: "Something is broken"'
+          expected_message = 'jonallured commented on #1: "Something is broken"'
+          expect(hook.message).to eq expected_message
           expect(hook.url).to eq 'https://github.com/jonallured/cybertail-rails/issues/1#issuecomment-123456'
         end
       end

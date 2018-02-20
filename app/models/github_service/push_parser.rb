@@ -16,7 +16,7 @@ module GithubService
     end
 
     def ref
-      @params[:ref].split("/").last
+      @params[:ref].split('/').last
     end
 
     def message
@@ -28,7 +28,7 @@ module GithubService
     end
 
     def suppress
-      commit_count == 0
+      commit_count.zero?
     end
   end
 end

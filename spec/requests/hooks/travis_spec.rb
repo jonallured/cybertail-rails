@@ -6,7 +6,7 @@ describe 'Travis hooks', subdomain: 'hooks' do
     project = service.projects.create name: 'jonallured/cybertail-rails'
 
     payload = {
-      number: "1",
+      number: '1',
       author_name: 'Jon Allured',
       result_message: 'Passed',
       build_url: 'https://travis-ci.org/',
@@ -26,7 +26,7 @@ describe 'Travis hooks', subdomain: 'hooks' do
 
     hook = Hook.first
     expect(hook.service_id).to eq service.id
-    expect(hook.message).to eq "build #1 by Jon Allured passed"
-    expect(hook.url).to eq "https://travis-ci.org/"
+    expect(hook.message).to eq 'build #1 by Jon Allured passed'
+    expect(hook.url).to eq 'https://travis-ci.org/'
   end
 end

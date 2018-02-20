@@ -17,7 +17,7 @@ describe 'Heroku hooks', subdomain: 'hooks' do
 
     hook = Hook.first
     expect(hook.service_id).to eq service.id
-    expect(hook.message).to eq "v1 deployed by jon.allured@gmail.com"
-    expect(hook.url).to eq "https://dashboard.heroku.com/apps/cybertail"
+    expect(hook.message).to eq 'v1 deployed by jon.allured@gmail.com'
+    expect(hook.url).to eq 'https://dashboard.heroku.com/apps/cybertail'
   end
 end

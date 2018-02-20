@@ -2,7 +2,8 @@ module GithubService
   class GenericParser < BaseParser
     def parse
       hook = super
-      hook.update_attributes message: "Got event #{@event}, saved as Hook #{hook.id}."
+      message = "Got event #{@event}, saved as Hook #{hook.id}."
+      hook.update_attributes message: message
       hook
     end
 

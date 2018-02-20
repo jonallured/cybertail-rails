@@ -1,6 +1,6 @@
 class Service < ApplicationRecord
   has_many :projects, dependent: :destroy
-  validates_presence_of :name
+  validates :name, presence: true
 
   def self.circle
     find_by name: 'Circle CI'

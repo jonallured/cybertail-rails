@@ -3,8 +3,6 @@ require 'rails_helper'
 describe 'GET /v1/hooks', subdomain: 'api' do
   context 'without a token' do
     it 'returns an empty 404 response' do
-      hook = FactoryBot.create :hook
-
       get '/v1/hooks.json'
 
       expect(response.code).to eq '404'
@@ -14,8 +12,6 @@ describe 'GET /v1/hooks', subdomain: 'api' do
 
   context 'with an invalid token' do
     it 'returns an empty 404 response' do
-      hook = FactoryBot.create :hook
-
       get '/v1/hooks.json', headers: { 'X-USER-TOKEN' => 'invalid' }
 
       expect(response.code).to eq '404'
@@ -42,9 +38,13 @@ describe 'GET /v1/hooks', subdomain: 'api' do
       it 'returns the hooks up to and including the bookmarked hook' do
         project = FactoryBot.create :project
 
-        older_hook = FactoryBot.create :hook, project: project, created_at: 1.day.ago
+        older_hook = FactoryBot.create(
+          :hook,
+          project: project,
+          created_at: 1.day.ago
+        )
+
         hook = FactoryBot.create :hook, project: project
-        newer_hook = FactoryBot.create :hook, project: project, created_at: 1.day.from_now
 
         user = FactoryBot.create :user, bookmarked_at: hook.created_at
         FactoryBot.create :subscription, user: user, project: project
@@ -56,52 +56,62 @@ describe 'GET /v1/hooks', subdomain: 'api' do
         hooks = JSON.parse response.body
 
         expect(hooks.size).to eq 2
-        expect(hooks).to eq([
-          {
-            'id' => hook.id,
-            'service_id' => hook.project.service.id,
-            'project_name' => hook.project.name,
-            'message' => hook.message,
-            'url' => hook.url,
-            'sent_at' => hook.sent_at.as_json
-          },
-          {
-            'id' => older_hook.id,
-            'service_id' => older_hook.project.service.id,
-            'project_name' => older_hook.project.name,
-            'message' => older_hook.message,
-            'url' => older_hook.url,
-            'sent_at' => older_hook.sent_at.as_json
-          }
-        ])
+        expect(hooks).to eq(
+          [
+            {
+              'id' => hook.id,
+              'service_id' => hook.project.service.id,
+              'project_name' => hook.project.name,
+              'message' => hook.message,
+              'url' => hook.url,
+              'sent_at' => hook.sent_at.as_json
+            },
+            {
+              'id' => older_hook.id,
+              'service_id' => older_hook.project.service.id,
+              'project_name' => older_hook.project.name,
+              'message' => older_hook.message,
+              'url' => older_hook.url,
+              'sent_at' => older_hook.sent_at.as_json
+            }
+          ]
+        )
       end
 
       context 'with a newest_hook_id' do
         it 'returns only hooks newer than that id' do
           project = FactoryBot.create :project
 
-          older_hook = FactoryBot.create :hook, project: project, created_at: 1.day.ago
           hook = FactoryBot.create :hook, project: project
-          newer_hook = FactoryBot.create :hook, project: project, created_at: 1.day.from_now
+
+          newer_hook = FactoryBot.create(
+            :hook,
+            project: project,
+            created_at: 1.day.from_now
+          )
 
           user = FactoryBot.create :user, bookmarked_at: hook.created_at
           FactoryBot.create :subscription, user: user, project: project
 
-          get '/v1/hooks.json', params: { newest_hook_id: hook.id }, headers: { 'X-USER-TOKEN' => user.token }
+          params = { newest_hook_id: hook.id }
+          headers = { 'X-USER-TOKEN' => user.token }
+          get '/v1/hooks.json', params: params, headers: headers
 
           hooks = JSON.parse response.body
 
           expect(hooks.size).to eq 1
-          expect(hooks).to eq([
-            {
-              'id' => newer_hook.id,
-              'service_id' => newer_hook.project.service.id,
-              'project_name' => newer_hook.project.name,
-              'message' => newer_hook.message,
-              'url' => newer_hook.url,
-              'sent_at' => newer_hook.sent_at.as_json
-            }
-          ])
+          expect(hooks).to eq(
+            [
+              {
+                'id' => newer_hook.id,
+                'service_id' => newer_hook.project.service.id,
+                'project_name' => newer_hook.project.name,
+                'message' => newer_hook.message,
+                'url' => newer_hook.url,
+                'sent_at' => newer_hook.sent_at.as_json
+              }
+            ]
+          )
         end
       end
     end

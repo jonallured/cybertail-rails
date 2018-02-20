@@ -1,0 +1,26 @@
+AllCops:
+  Exclude:
+    - 'bin/**'
+    - 'vendor/**/*'
+
+Layout/LeadingCommentSpace:
+  Exclude:
+    - 'Gemfile'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/*'
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/controllers/api/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

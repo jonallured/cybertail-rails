@@ -4,6 +4,7 @@ ruby '2.5.0'
 #ruby-gemset=cybertail-rails
 
 gem 'rails', '5.1.5'
+
 gem 'pg', '0.21.0'
 gem 'puma'
 
@@ -31,4 +32,5 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'rubocop'
 end

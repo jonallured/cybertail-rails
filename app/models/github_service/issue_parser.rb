@@ -19,7 +19,7 @@ module GithubService
     end
 
     def message
-      %Q|#{username} opened ##{number}: "#{title}"|
+      %(#{username} opened ##{number}: "#{title}")
     end
 
     def url

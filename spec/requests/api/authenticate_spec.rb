@@ -22,9 +22,9 @@ describe 'GET /v1/authenticate', subdomain: 'api' do
       expect(response.code).to eq '200'
 
       response_json = JSON.parse response.body
-      expect(response_json).to eq({
+      expect(response_json).to eq(
         'token' => user.token
-      })
+      )
     end
   end
 end
