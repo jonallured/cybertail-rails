@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 
   constraints subdomain: 'hooks' do
     post '/v1/:project_token', to: 'hooks#create'
+    post :github, to: 'hooks#github_create'
   end
 end
