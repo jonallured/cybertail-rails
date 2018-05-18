@@ -12,7 +12,7 @@ class HooksController < ApplicationController
     hook_attrs = {
       payload: request.body.read,
       sent_at: Time.zone.now,
-      project_id: 24
+      project: Service.test.projects.first
     }
     Hook.create! hook_attrs
     head :created
