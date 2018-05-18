@@ -11,7 +11,8 @@ class HooksController < ApplicationController
   def github_create
     hook_attrs = {
       payload: request.body.read,
-      sent_at: Time.zone.now
+      sent_at: Time.zone.now,
+      project_id: 24
     }
     Hook.create! hook_attrs
     head :created
