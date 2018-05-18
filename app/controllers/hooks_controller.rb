@@ -13,7 +13,7 @@ class HooksController < ApplicationController
       payload: request.body.read,
       sent_at: Time.zone.now
     }
-    Hook.create hook_attrs
+    Hook.create! hook_attrs
     head :created
   end
 
