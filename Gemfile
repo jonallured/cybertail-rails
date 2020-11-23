@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.0'
-#ruby-gemset=cybertail-rails
+ruby File.read('.tool-versions').split[1]
 
 gem 'rails', '5.1.5'
 
