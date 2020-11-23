@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   constraints subdomain: 'hooks' do
     post '/v1/:project_token', to: 'hooks#create'
   end
+
+  get :ping, to: 'ping#show'
 end
