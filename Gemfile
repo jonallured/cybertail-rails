@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 ruby File.read('.tool-versions').split[1]
 
-gem 'rails', '5.1.5'
+gem 'rails', '5.1.7'
 
-gem 'pg', '0.21.0'
+gem 'pg'
 gem 'puma'
 
 gem 'coffee-rails'
@@ -28,7 +28,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '4.8.2'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop', '0.52.1'
