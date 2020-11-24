@@ -10,6 +10,6 @@ class Api::V1::AuthenticateController < ApiController
   private
 
   def valid_user?
-    user && user.valid_password?(params[:password])
+    user&.valid_password?(params[:password])
   end
 end
