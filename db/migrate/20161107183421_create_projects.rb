@@ -13,8 +13,8 @@ class Hook < ApplicationRecord
   belongs_to :project
 end
 
+# rubocop:disable Rails/BulkChangeTable
 class CreateProjects < ActiveRecord::Migration[5.0]
-  # rubocop:disable Metrics/AbcSize
   def up
     rename_column :hooks, :project, :project_name
 
@@ -29,14 +29,13 @@ class CreateProjects < ActiveRecord::Migration[5.0]
     Service.all.each do |service|
       service.hooks.each do |hook|
         project = service.projects.find_or_create_by name: hook.project_name
-        hook.update_attributes project: project
+        hook.update project: project
       end
     end
 
     remove_column :hooks, :service_id
     remove_column :hooks, :project_name
   end
-  # rubocop:enable Metrics/AbcSize
 
   def down
     add_column :hooks, :project_name, :string
@@ -49,7 +48,7 @@ class CreateProjects < ActiveRecord::Migration[5.0]
           project_name: project.name
         }
 
-        hook.update_attributes attrs
+        hook.update attrs
       end
     end
 
@@ -60,3 +59,4 @@ class CreateProjects < ActiveRecord::Migration[5.0]
     rename_column :hooks, :project_name, :project
   end
 end
+# rubocop:enable Rails/BulkChangeTable

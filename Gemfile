@@ -31,5 +31,5 @@ group :development, :test do
   gem 'factory_bot_rails', '4.8.2'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'rubocop', '0.52.1'
+  gem 'rubocop-rails'
 end

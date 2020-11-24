@@ -3,7 +3,7 @@ module GithubService
     def parse
       hook = super
       message = "Got event #{@event}, saved as Hook #{hook.id}."
-      hook.update_attributes message: message
+      hook.update message: message
       hook
     end
 
