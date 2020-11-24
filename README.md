@@ -1,6 +1,4 @@
-# README
-
-[![Build Status][status]][icon]
+# Cybertail Rails [![CircleCI][badge]][circle]
 
 ## Setup
 
@@ -22,5 +20,5 @@ $ bundle exec rake spec
 
 Note: the default rake task is setup to run tests and RuboCop.
 
-[status]: https://travis-ci.org/jonallured/cybertail-rails.svg?branch=master
-[icon]: https://travis-ci.org/jonallured/cybertail-rails
+[badge]: https://circleci.com/gh/verynicecode/cybertail-rails.svg?style=svg
+[circle]: https://circleci.com/gh/verynicecode/cybertail-rails
