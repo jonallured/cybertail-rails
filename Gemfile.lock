@@ -259,7 +259,7 @@ DEPENDENCIES
   rails-erd
   rails_12factor
   rspec-rails
-  rubocop
+  rubocop (= 0.52.1)
   sass-rails
   uglifier
   web-console
