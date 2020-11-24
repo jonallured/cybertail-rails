@@ -1,31 +1,32 @@
-#!/usr/bin/env ruby
-require 'fileutils'
-include FileUtils
+#!/bin/bash
 
-# path to your application root.
-APP_ROOT = File.expand_path('..', __dir__)
+set -e
 
-def system!(*args)
-  system(*args) || abort("\n== Command #{args} failed ==")
-end
+git ensure-main
 
-chdir APP_ROOT do
-  # This script is a way to update your development environment automatically.
-  # Add necessary update steps to this file.
+labels="automerge,dependencies"
+message=$(cat <<"END"
+Dependency Updates
 
-  puts '== Installing dependencies =='
-  system! 'gem install bundler --conservative'
-  system('bundle check') || system!('bundle install')
+This commit updates project dependencies like this:
 
-  # Install JavaScript dependencies if using Yarn
-  # system('bin/yarn')
+```
+$ bundle update
+```
 
-  puts "\n== Updating database =="
-  system! 'bin/rails db:migrate'
+It was automatically created with this script:
 
-  puts "\n== Removing old logs and tempfiles =="
-  system! 'bin/rails log:clear tmp:clear'
+```
+$ ./bin/update
+```
+END
+)
 
-  puts "\n== Restarting application server =="
-  system! 'bin/rails restart'
-end
+git fetch --all --quiet
+git checkout -b updates
+bundle update
+bundle exec rake
+git add .
+git commit --message "$message"
+git push origin updates
+gh pr create --fill --label "$labels"
