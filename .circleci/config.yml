@@ -18,7 +18,7 @@ jobs:
 
       - run:
           name: Bundle install
-          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: gem install bundler && bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
           name: Save bundler cache
