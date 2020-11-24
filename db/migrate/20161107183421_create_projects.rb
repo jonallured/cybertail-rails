@@ -13,7 +13,6 @@ class Hook < ApplicationRecord
   belongs_to :project
 end
 
-# rubocop:disable Rails/BulkChangeTable
 class CreateProjects < ActiveRecord::Migration[5.0]
   def up
     rename_column :hooks, :project, :project_name
@@ -59,4 +58,3 @@ class CreateProjects < ActiveRecord::Migration[5.0]
     rename_column :hooks, :project_name, :project
   end
 end
-# rubocop:enable Rails/BulkChangeTable
