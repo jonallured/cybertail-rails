@@ -4,7 +4,7 @@ jobs:
   default:
     working_directory: ~/cybertail
     docker:
-      - image: circleci/ruby:2.5.8-node-browsers
+      - image: circleci/ruby:2.7.1-node-browsers
         environment:
           RAILS_ENV: test
       - image: circleci/postgres:12.1-alpine
@@ -18,7 +18,7 @@ jobs:
 
       - run:
           name: Bundle install
-          command: gem install bundler && bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
           name: Save bundler cache
