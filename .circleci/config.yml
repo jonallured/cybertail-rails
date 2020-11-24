@@ -1,0 +1,41 @@
+version: 2
+
+jobs:
+  default:
+    working_directory: ~/cybertail
+    docker:
+      - image: circleci/ruby:2.5.8-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:12.1-alpine
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          name: Restore bundler cache
+          key: bundler-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Bundle install
+          command: bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          name: Save bundler cache
+          key: bundler-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Setup database
+          command: mv config/database{.circle,}.yml && bundle exec rake db:create db:migrate
+
+      - run:
+          name: Run tests
+          command: bundle exec rake
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - default
