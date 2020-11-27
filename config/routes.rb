@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   namespace 'admin' do
+    resources :providers, only: %i[index show]
     resources :raw_hooks, only: %i[index show]
   end
 
