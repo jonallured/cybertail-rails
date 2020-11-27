@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe 'Providers list page' do
   before do
+    admin = FactoryBot.create(:admin)
+    login_as(admin, scope: :user)
     FactoryBot.create_list(:provider, provider_count)
   end
 
