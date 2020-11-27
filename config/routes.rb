@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users, DeviseUser.route_options
+
+  devise_scope :user do
+    get 'forgot', to: 'devise/passwords#new', as: :forgot
+    get 'sign-in', to: 'devise/sessions#new', as: :sign_in
+    get 'sign-out', to: 'devise/sessions#destroy', as: :sign_out
+    get 'sign-up', to: 'devise/registrations#new', as: :sign_up
+  end
+
   scope module: 'api', constraints: { subdomain: 'api' } do
     namespace 'v1' do
       get '/hooks/', to: 'hooks#index'
