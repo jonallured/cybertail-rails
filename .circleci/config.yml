@@ -31,6 +31,10 @@ jobs:
           command: mv config/database{.circle,}.yml && bundle exec rake db:create db:migrate
 
       - run:
+          name: Update Chrome
+          command: bundle exec rake webdrivers:chromedriver:update
+
+      - run:
           name: Run tests
           command: bundle exec rake
 
