@@ -2,6 +2,8 @@ require 'rails_helper'
 
 describe 'Raw Hooks list page' do
   before do
+    admin = FactoryBot.create(:admin)
+    login_as(admin, scope: :user)
     FactoryBot.create_list(:raw_hook, raw_hook_count)
   end
 
