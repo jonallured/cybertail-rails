@@ -1,5 +1,5 @@
 class BaseParser
-  def self.can_parse(_raw_hook)
+  def self.can_parse?(_raw_hook)
     raise 'Implement in subclass'
   end
 
