@@ -29,7 +29,7 @@ describe 'Raw Hooks list page' do
 
     it 'shows the first 10 hooks' do
       visit '/admin/raw_hooks'
-      expect(page).to have_css('li', count: 10)
+      expect(page).to have_css('li', count: 20)
     end
   end
 end

@@ -1,0 +1,11 @@
+%h1 Raw Hook #{raw_hook.id}
+
+%h2 Body
+%code
+  %pre= JSON.pretty_generate(JSON.parse(raw_hook.body.as_json))
+%h2 Headers
+%code
+  %pre= JSON.pretty_generate(raw_hook.headers)
+%h2 Params
+%code
+  %pre= JSON.pretty_generate(raw_hook.params)

@@ -2,4 +2,5 @@
 
 %ul
   - raw_hooks.each do |raw_hook|
-    %li= raw_hook.id
+    %li
+      %a{href: admin_raw_hook_path(raw_hook)} #{raw_hook.id} - #{raw_hook.body.first(100)}
