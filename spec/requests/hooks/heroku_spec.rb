@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Heroku hooks', subdomain: 'hooks' do
+xdescribe 'Heroku hooks', subdomain: 'hooks' do
   it 'something' do
     service = FactoryBot.create :heroku_service
     project = service.projects.create name: 'cybertail'

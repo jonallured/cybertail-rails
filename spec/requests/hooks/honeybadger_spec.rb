@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Honeybadger hooks', subdomain: 'hooks' do
+xdescribe 'Honeybadger hooks', subdomain: 'hooks' do
   it 'something' do
     service = FactoryBot.create :honeybadger_service
     project = service.projects.create name: 'Cybertail'
