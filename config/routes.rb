@@ -11,5 +11,9 @@ Rails.application.routes.draw do
     post '/', to: 'raw_hooks#create'
   end
 
+  namespace 'admin' do
+    resources :raw_hooks, only: %i[index show]
+  end
+
   get :ping, to: 'ping#show'
 end
