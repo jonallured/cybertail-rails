@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -ex
+
+heroku pg:reset DATABASE_URL --confirm cybertail-staging --remote staging
+staging_url=$(heroku config:get DATABASE_URL --remote staging)
+heroku pg:pull DATABASE_URL $staging_url --remote production
+dropdb cybertail_development
+heroku pg:pull DATABASE_URL cybertail_development --remote staging
+bundle exec rake db:environment:set RAILS_ENV=development
