@@ -28,6 +28,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'factory_bot_rails', '4.8.2'
   gem 'pry-rails'
   gem 'rspec-rails'
