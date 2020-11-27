@@ -4,7 +4,7 @@ FactoryBot.define do
       "user#{n}@example.com"
     end
 
-    password 'password'
+    password { 'sh' * 9 }
     bookmarked_at Time.current
   end
 end
