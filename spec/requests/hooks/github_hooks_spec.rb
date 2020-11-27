@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'GitHub hooks', subdomain: 'hooks' do
+xdescribe 'GitHub hooks', subdomain: 'hooks' do
   let(:service) { FactoryBot.create :github_service }
 
   context 'unknown event' do

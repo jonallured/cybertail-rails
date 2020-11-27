@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   constraints subdomain: 'hooks' do
-    post '/v1/:project_token', to: 'hooks#create'
+    post '/', to: 'raw_hooks#create'
   end
 
   get :ping, to: 'ping#show'
